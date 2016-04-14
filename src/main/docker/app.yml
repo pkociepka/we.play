@@ -1,0 +1,15 @@
+version: '2'
+services:
+    weplay-app:
+        image: weplay
+        external_links:
+            - weplay-mysql:mysql
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/weplay?useUnicode=true&characterEncoding=utf8&useSSL=false
+        ports:
+            - 8080:8080
+    weplay-mysql:
+        extends:
+            file: mysql.yml
+            service: weplay-mysql
