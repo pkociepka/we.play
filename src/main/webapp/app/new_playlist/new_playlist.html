@@ -1,0 +1,76 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal col-md-12" ng-submit="submitEvent(event)">
+                <div class="form-group" ng-show="data.step == 1">
+                    <h1>Create new playlist</h1>
+                    <p class="lead">Step 1 Add friends</p>
+                    <div>
+                        <input class="form-control" type="text" placeholder="Enter nickname">
+                    </div>
+                </div>
+                <div class="form-group" ng-show="data.step == 2">
+                    <h1>Create new playlist</h1>
+                    <p class="lead">Step 2 Choose activity</p>
+                    <div class="row">
+                        <ul class="nav nav-tabs">
+                            <li class="col-md-3">
+                                <span class="fa fa-bicycle"></span>
+                                <span>Training</span>
+                            </li>
+                            <li class="col-md-3">
+                                <span class="fa fa-birthday-cake"></span>
+                                <span>Party</span>
+                            </li>
+                            <li class="col-md-3">
+                                <span class="fa fa-tree"></span>
+                                <span>Hiking</span>
+                            </li>
+                            <li class="col-md-3">
+                                <span class="fa fa-bed"></span>
+                                <span>Sleeping</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="data.step == 3">
+                    <h1>Create new playlist</h1>
+                    <p class="lead">Step 3 Set parameters</p>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <span class="fa fa-bolt"></span>
+                            <span>Energy</span>
+                            <input type="range">
+                        </div>
+                        <div class="col-md-5">
+                            <span class="fa fa-music"></span>
+                            <span>Dancability</span>
+                            <input type="range">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <span class="fa fa-smile-o"></span>
+                            <span>Mood</span>
+                            <input type="range">
+                        </div>
+                        <div class="col-md-5">
+                            <span class="fa fa-fire-extinguisher"></span>
+                            <span>Hottness</span>
+                            <input type="range">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="data.step == 4">
+                    <h1>Create new playlist</h1>
+                    <p class="lead">Step 3 Add must-hear songs</p>
+                    <div>
+                        <input class="form-control" type="text" placeholder="Enter">
+                    </div>
+                </div>
+            </form>
+            <button class="btn btn-primary" ng-show="data.step == 4">Generate</button>
+            <button class="btn btn-primary" ng-click="nextStep()" ng-hide="data.step == 4">Next</button>
+        </div>
+    </div>
+</div>
