@@ -13,9 +13,9 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('new_playlist', {
             parent: 'app',
-            url: '/',
+            url: '/new',
             data: {
-                authorities: []
+                authorities: ['ROLE_USER']
             },
             views: {
                 'content@': {

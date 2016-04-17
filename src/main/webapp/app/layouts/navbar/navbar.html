@@ -18,11 +18,11 @@
                     </a>
                 </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ui-sref-active="active">
-                    <a ui-sref="new_playlist" ng-click="vm.navCollapsed = false">
+                <li class="{active: vm.$state.includes('new_playlist')}" ng-switch-when="true">
+                    <a ui-sref="new_playlist">
                         <span>
                             <span class="fa fa-plus"></span>
-                            <span >
+                            <span class="hidden-sm">
                                 New
                             </span>
                         </span>
