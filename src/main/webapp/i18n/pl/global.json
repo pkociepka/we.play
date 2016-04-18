@@ -9,6 +9,7 @@
                 "main": "Encje",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
+            "new" : "Nowa",
             "account": {
                 "main": "Konto",
                 "settings": "Ustawienia",

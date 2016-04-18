@@ -1,4 +1,29 @@
 {
     "new_playlist": {
+        "header": "Create new playlist",
+        "enter_nickname": "Enter nickname",
+        "enter": "Enter",
+        "add_button": "Add",
+        "next_button": "Next",
+        "generate_button": "Generate",
+        "activity": {
+            "training": "Training",
+            "party": "Party",
+            "hiking": "Hiking",
+            "sleeping": "Sleeping"
+        },
+        "steps" : {
+            "step1": "Step 1 Add friends",
+            "step2": "Step 2 Choose activity",
+            "step3": "Step 3 Set parameters",
+            "step4": "Step 4 Add must-hear songs"
+        },
+        "parameters": {
+            "energy": "Energy",
+            "dancability": "Dancability",
+            "mood": "Mood",
+            "hottness": "Hottness"
+        }
+
     }
 }
