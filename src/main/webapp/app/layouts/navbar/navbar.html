@@ -18,7 +18,16 @@
                     </a>
                 </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
+                <li class="{active: vm.$state.includes('new_playlist')}" ng-switch-when="true">
+                    <a ui-sref="new_playlist">
+                        <span>
+                            <span class="fa fa-plus"></span>
+                            <span class="hidden-sm" translate="global.menu.new">
+                                New
+                            </span>
+                        </span>
+                    </a>
+                </li><li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                             <span class="glyphicon glyphicon-th-list"></span>

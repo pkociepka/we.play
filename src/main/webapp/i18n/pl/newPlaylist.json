@@ -1,0 +1,29 @@
+{
+    "new_playlist": {
+        "header": "Stwórz nową playlistę",
+        "enter_nickname": "Wprowadź nick",
+        "enter": "Wprowadź",
+        "add_button": "Dodaj",
+        "next_button": "Dalej",
+        "generate_button": "Generuj",
+        "activity": {
+            "training": "Trening",
+            "party": "Impreza",
+            "hiking": "Spacer",
+            "sleeping": "Spanie"
+        },
+        "steps" : {
+            "step1": "Krok 1 Dodaj znajomych",
+            "step2": "Krok 2 Wybierz rodzaj aktywności",
+            "step3": "Krok 3 Ustaw parametry",
+            "step4": "Krok 4 Dodaj utwory, które koniecznie powinny się pojawić"
+        },
+        "parameters": {
+            "energy": "Energiczność",
+            "dancability": "Taneczność",
+            "mood": "Nastrój",
+            "hottness": "Hottness"
+        }
+
+    }
+}
