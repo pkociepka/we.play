@@ -16,6 +16,10 @@
 
         $scope.nextStep = function() {
             $scope.data.step += 1;
+        };
+        
+        $scope.prevStep = function () {
+            $scope.data.step -= 1;
         }
     }
 })();

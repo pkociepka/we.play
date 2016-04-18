@@ -3,9 +3,12 @@
         "header": "Create new playlist",
         "enter_nickname": "Enter nickname",
         "enter": "Enter",
-        "add_button": "Add",
-        "next_button": "Next",
-        "generate_button": "Generate",
+        "buttons": {
+            "search": "Search",
+            "next": "Next",
+            "prev": "Previous",
+            "generate": "Generate"
+        },
         "activity": {
             "training": "Training",
             "party": "Party",

@@ -3,9 +3,12 @@
         "header": "Stwórz nową playlistę",
         "enter_nickname": "Wprowadź nick",
         "enter": "Wprowadź",
-        "add_button": "Dodaj",
-        "next_button": "Dalej",
-        "generate_button": "Generuj",
+        "buttons": {
+            "search": "Szukaj",
+            "next": "Dalej",
+            "prev": "Wstecz",
+            "generate": "Generuj"
+        },
         "activity": {
             "training": "Trening",
             "party": "Impreza",
