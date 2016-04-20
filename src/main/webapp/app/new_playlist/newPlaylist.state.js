@@ -1,6 +1,3 @@
-/**
- * Created by Roksana on 2016-04-17.
- */
 (function() {
     'use strict';
 

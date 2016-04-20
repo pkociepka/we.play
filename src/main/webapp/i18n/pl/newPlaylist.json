@@ -4,7 +4,6 @@
         "enter_nickname": "Wprowadź nick",
         "enter": "Wprowadź",
         "buttons": {
-            "search": "Szukaj",
             "next": "Dalej",
             "prev": "Wstecz",
             "generate": "Generuj"

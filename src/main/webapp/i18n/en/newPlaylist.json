@@ -4,7 +4,6 @@
         "enter_nickname": "Enter nickname",
         "enter": "Enter",
         "buttons": {
-            "search": "Search",
             "next": "Next",
             "prev": "Previous",
             "generate": "Generate"
