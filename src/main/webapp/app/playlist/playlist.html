@@ -1,0 +1,39 @@
+<style type="text/css">
+    form.tab-form-demo .tab-pane {
+        margin: 20px 20px;
+    }
+</style>
+
+<div ng-controller="PlaylistController">
+
+    <uib-tabset active="active">
+        <uib-tab index="0" heading="Playlist">
+            Static content
+        </uib-tab>
+        <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+            {{tab.content}}
+        </uib-tab>
+    </uib-tabset>
+
+    <hr />
+
+    Tabs using nested forms:
+    <form name="outerForm" class="tab-form-demo">
+        <uib-tabset active="activeForm">
+            <uib-tab index="0" heading="Form Tab">
+                <ng-form name="nestedForm">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" required ng-model="model.name"/>
+                    </div>
+                </ng-form>
+            </uib-tab>
+            <uib-tab index="1" heading="Tab One">
+                Some Tab Content
+            </uib-tab>
+            <uib-tab index="2" heading="Tab Two">
+                More Tab Content
+            </uib-tab>
+        </uib-tabset>
+    </form>
+</div>
