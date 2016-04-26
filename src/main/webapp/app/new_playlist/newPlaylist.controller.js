@@ -5,8 +5,8 @@
         .module('wePlayApp')
         .controller('NewPlaylistController', NewPlaylistController);
 
-    NewPlaylistController.$inject = ['$scope'];
-    function NewPlaylistController  ($scope) {
+    NewPlaylistController.$inject = ['$scope', '$http'];
+    function NewPlaylistController  ($scope, $http) {
         $scope.data = {
             step: 1,
             friends: [],
@@ -31,10 +31,12 @@
         };
 
         $scope.searchSong = function () {
-            if ($scope.data.newSong != null) {
-                $scope.data.songs.push($scope.data.newSong);
+            $http.get('some/'+$scope.data.newSong).success(function(response) {
+                $scope.data.songs = response;
                 $scope.data.newSong = null;
-            }
+            }).error(function () {
+                console.log('error');
+            })
         }
     }
 })();

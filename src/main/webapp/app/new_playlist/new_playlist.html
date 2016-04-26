@@ -89,7 +89,7 @@
                                 </span>
                             </div>
                             <div class="list-group">
-                                <span class="list-group-item" ng-repeat="s in data.songs">{{s}}</span>
+                                <span class="list-group-item" ng-repeat="t in data.songs track by $index">{{t}}</span>
                             </div>
                         </div>
                     </div>
