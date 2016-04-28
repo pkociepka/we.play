@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .controller('NewPlaylistController', NewPlaylistController);
 
     NewPlaylistController.$inject = ['$scope', '$http'];
-    function NewPlaylistController  ($scope, $http) {
+    function NewPlaylistController($scope, $http) {
         $scope.data = {
             step: 1,
             friends: [],
@@ -15,7 +15,7 @@
             newSong: null
         };
 
-        $scope.nextStep = function() {
+        $scope.nextStep = function () {
             $scope.data.step += 1;
         };
 
@@ -30,13 +30,10 @@
             }
         };
 
-        $scope.searchSong = function () {
-            $http.get('tracks/'+$scope.data.newSong).success(function(response) {
-                $scope.data.songs = response;
-                $scope.data.newSong = null;
-            }).error(function () {
-                console.log('error');
+        $scope.searchSong = function (val) {
+            return $http.get('tracks/' + val).then(function (response) {
+                return response.data;
             })
-        }
+        };
     }
 })();
