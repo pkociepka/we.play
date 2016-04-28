@@ -2,6 +2,9 @@
     <div class="row">
         <div class="col-md-12">
             <form class="form-horizontal col-md-12" ng-submit="submitEvent(event)">
+
+                <!---------------- STEP 1 ADD FRIENDS ---------------->
+
                 <div class="form-group" ng-show="data.step == 1">
                     <h1 translate="new_playlist.header">Create new playlist</h1>
                     <p class="lead" translate="new_playlist.steps.step1">Step 1 Add friends</p>
@@ -21,6 +24,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!---------------- STEP 2 CHOOSE ACTIVITY ---------------->
+
                 <div class="form-group" ng-show="data.step == 2">
                     <h1 translate="new_playlist.header">Create new playlist</h1>
                     <p class="lead" translate="new_playlist.steps.step2">Step 2 Choose activity</p>
@@ -47,6 +53,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!---------------- STEP 3 SET PARAMETERS ---------------->
+
                 <div class="form-group" ng-show="data.step == 3">
                     <h1 translate="new_playlist.header">Create new playlist</h1>
                     <p class="lead" translate="new_playlist.steps.step3">Step 3 Set parameters</p>
@@ -75,6 +84,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!---------------- STEP 4 MUST-HEAR SONGS ---------------->
+
                 <div class="form-group" ng-show="data.step == 4">
                     <h1 translate="new_playlist.header">Create new playlist</h1>
                     <p class="lead" translate="new_playlist.steps.step4">Step 4 Add must-hear songs</p>

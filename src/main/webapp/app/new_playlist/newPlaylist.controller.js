@@ -11,7 +11,6 @@
             step: 1,
             friends: [],
             newFriend: null,
-            songs: [],
             newSong: null
         };
 
