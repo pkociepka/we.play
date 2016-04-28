@@ -29,9 +29,8 @@ public class TrackController {
         try {
             Page<Track> trackSearchResult = request.get();
 
-            trackSearchResult.getItems().stream().forEach(track -> {
-                list.add(track.getName());
-            });
+            trackSearchResult.getItems().stream().forEach(track -> list.add(track.getName()));
+
             return new ResponseEntity<List<String>>(list, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();

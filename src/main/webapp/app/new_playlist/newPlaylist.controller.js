@@ -31,7 +31,7 @@
         };
 
         $scope.searchSong = function () {
-            $http.get('some/'+$scope.data.newSong).success(function(response) {
+            $http.get('tracks/'+$scope.data.newSong).success(function(response) {
                 $scope.data.songs = response;
                 $scope.data.newSong = null;
             }).error(function () {
