@@ -115,13 +115,13 @@
                     </div>
                 </div>
             </form>
-            <button class="btn btn-primary" ng-disabled="data.step == 1" ng-click="prevStep()"
+            <button class="btn btn-primary" ng-disabled="data.step == 1" ng-click="prevStep()" ng-show="data.step <= 4"
                     translate="new_playlist.buttons.prev">Previous
             </button>
-            <button class="btn btn-primary" ng-click="generate()" ng-show="data.step == 4" ng-hide="!data.generated" translate="new_playlist.buttons.generate">
+            <button class="btn btn-primary" ng-click="generate()" ng-show="data.step == 4" translate="new_playlist.buttons.generate">
                 Generate
             </button>
-            <button class="btn btn-primary" ng-click="nextStep()" ng-hide="data.step == 4"
+            <button class="btn btn-primary" ng-click="nextStep()" ng-disabled="data.step == 4" ng-hide="data.step > 4"
                     translate="new_playlist.buttons.next">Next
             </button>
             <div ng-show="data.generated">

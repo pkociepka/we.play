@@ -35,9 +35,10 @@
                 return response.data;
             })
         };
-        
+
         $scope.generate = function () {
-            data.generated = true;
+            $scope.data.generated = true;
+            $scope.data.step++;
         }
     }
 })();
