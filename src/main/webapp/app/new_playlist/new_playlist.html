@@ -11,10 +11,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <input class="form-control" ng-model="data.newFriend" type="text" placeholder="{{ 'new_playlist.enter_nickname' | translate }}">
+                                <input class="form-control" ng-model="data.newFriend" type="text"
+                                       placeholder="{{ 'new_playlist.enter_nickname' | translate }}">
                                 <span class="input-group-btn">
                                      <button class="btn btn-default" ng-click="searchFriend()">
-                                         <span class="glyphicon glyphicon-search" />
+                                         <span class="glyphicon glyphicon-search"/>
                                      </button>
                                 </span>
                             </div>
@@ -93,11 +94,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <input class="form-control" ng-model="data.newSong" type="text" placeholder="{{ 'new_playlist.enter' | translate }}"
-                                       uib-typeahead="track for track in searchSong($viewValue)" typeahead-loading="loadingTracks" typeahead-no-results="noResults">
+                                <input class="form-control" ng-model="data.newSong" type="text"
+                                       placeholder="{{ 'new_playlist.enter' | translate }}"
+                                       uib-typeahead="track for track in searchSong($viewValue)"
+                                       typeahead-loading="loadingTracks" typeahead-no-results="noResults">
                                 <span class="input-group-btn">
                                      <button class="btn btn-default" ng-click="searchSong()">
-                                         <span class="glyphicon glyphicon-search" />
+                                         <span class="glyphicon glyphicon-search"/>
                                      </button>
                                 </span>
                             </div>
@@ -112,9 +115,20 @@
                     </div>
                 </div>
             </form>
-            <button class="btn btn-primary" ng-disabled="data.step == 1" ng-click="prevStep()" translate="new_playlist.buttons.prev">Previous</button>
-            <button class="btn btn-primary" ng-show="data.step == 4" translate="new_playlist.buttons.generate">Generate</button>
-            <button class="btn btn-primary" ng-click="nextStep()" ng-hide="data.step == 4" translate="new_playlist.buttons.next">Next</button>
+            <button class="btn btn-primary" ng-disabled="data.step == 1" ng-click="prevStep()"
+                    translate="new_playlist.buttons.prev">Previous
+            </button>
+            <button class="btn btn-primary" ng-click="generate()" ng-show="data.step == 4" ng-hide="!data.generated" translate="new_playlist.buttons.generate">
+                Generate
+            </button>
+            <button class="btn btn-primary" ng-click="nextStep()" ng-hide="data.step == 4"
+                    translate="new_playlist.buttons.next">Next
+            </button>
+            <div ng-show="data.generated">
+                <iframe
+                    src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe"
+                    frameborder="0" allowtransparency="true"></iframe>
+            </div>
         </div>
     </div>
 </div>

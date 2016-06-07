@@ -11,7 +11,8 @@
             step: 1,
             friends: [],
             newFriend: null,
-            newSong: null
+            newSong: null,
+            generated: false
         };
 
         $scope.nextStep = function () {
@@ -34,5 +35,9 @@
                 return response.data;
             })
         };
+        
+        $scope.generate = function () {
+            data.generated = true;
+        }
     }
 })();
