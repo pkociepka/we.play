@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.weplay.spotify.SpotifyConfig.*;
 
@@ -23,20 +24,19 @@ import static org.weplay.spotify.SpotifyConfig.*;
 public class TrackController {
 
     @RequestMapping(value = "/{title}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<String>> searchTracksByTitle(@PathVariable String title) {
+    public ResponseEntity<List<TrackTheSimplest>> findTrack(@PathVariable String title) {
         TrackSearchRequest request = API.searchTracks(title).build();
-        List<String> list = new ArrayList<>();
+        List<TrackTheSimplest> list = new ArrayList<>();
         try {
             Page<Track> trackSearchResult = request.get();
+            trackSearchResult.getItems().stream().forEach(track -> list.add(new TrackTheSimplest(track)));
 
-            trackSearchResult.getItems().stream().forEach(track -> list.add(track.getName()));
-
-            return new ResponseEntity<List<String>>(list, HttpStatus.OK);
+            return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (WebApiException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<List<String>>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
