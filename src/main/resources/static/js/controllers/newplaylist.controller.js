@@ -5,7 +5,6 @@
         .module('weplay')
         .controller('NewPlaylistController', NewPlaylistController);
 
-    // NewPlaylistController.$inject = ['$scope'];
     function NewPlaylistController  () {
         var vm = this;
 

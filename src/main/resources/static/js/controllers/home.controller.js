@@ -2,7 +2,7 @@
  * Created by Roksana on 2016-10-10.
  */
 (function () {
-    'use strict'
+    'use strict';
 
     angular
         .module('weplay')
