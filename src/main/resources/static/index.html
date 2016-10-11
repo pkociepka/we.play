@@ -8,8 +8,8 @@
 <body ng-app="weplay">
 <div class="navbar navbar-inverse" ng-controller="navigation as vm" class="container">
     <ul class="nav navbar-nav navbar-right" role="tablist">
-        <li ng-class="{active:vm.tab('home')}" ng-click="vm.clear()"><a href="#/">Home</a></li>
-        <li ng-class="{active:vm.tab('NewPlaylistController')}" ng-click="vm.clear()"><a href="#/new">New playlist</a></li>
+        <li ng-class="{active:vm.tab('home')}" ><a href="#/">Home</a></li>
+        <li ng-class="{active:vm.tab('NewPlaylistController')}" ><a href="#/new">New playlist</a></li>
     </ul>
 
 </div>
@@ -17,7 +17,8 @@
 <div ng-view class="container"></div>
 
 <script src="node_modules/angular/angular.js"></script>
-<script src="node_modules/angularjs/index.js"></script>
+<!--<script src="node_modules/angularjs/index.js"></script>-->
+<script src="node_modules/angular-route/angular-route.js"></script>
 <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 <script src="node_modules/angular-ui-bootstrap/index.js"></script>
 
@@ -26,6 +27,6 @@
 <script src="js/navbar/navbar.config.js"></script>
 <script src="js/controllers/home.controller.js"></script>
 <script src="js/controllers/newplaylist.controller.js"></script>
-<script src="js/controllers/newplaylist.state.js"></script>
+<!--<script src="js/controllers/newplaylist.state.js"></script>-->
 </body>
 </html>

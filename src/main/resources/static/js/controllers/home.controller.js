@@ -9,6 +9,7 @@
         .controller('home', HomeController);
 
     function HomeController(){
+        var vm = this;
         console.log("start");
     }
 })();

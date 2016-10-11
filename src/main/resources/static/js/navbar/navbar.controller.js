@@ -5,9 +5,9 @@
         .module('weplay')
         .controller('navigation', navigation);
 
-    navigation.$inject = ['$location', '$route', 'AuthenticationService', 'planService', 'PreviousState'];
+    navigation.$inject = ['$location', '$route'];
 
-    function navigation($location, $route, AuthenticationService, planService, PreviousState) {
+    function navigation($location, $route) {
 console.log("navigation");
         var vm = this;
         vm.tab = tab;
@@ -25,9 +25,9 @@ console.log("navigation");
     //         return AuthenticationService.isAuthenticated();
     //     }
     //
-    //     function tab(route) {
-    //         return $route.current && route === $route.current.controller;
-    //     }
+        function tab(route) {
+            return $route.current && route === $route.current.controller;
+        }
     //
     //     function login() {
     //         AuthenticationService.login(vm.credentials, function (authenticated) {

@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('weplay', [ 'ui.bootstrap']);
+        .module('weplay', [ 'ui.bootstrap', 'ngRoute']);
 })();

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('wePlayApp')
+        .module('weplay')
         .controller('NewPlaylistController', NewPlaylistController);
 
     // NewPlaylistController.$inject = ['$scope'];
@@ -16,26 +16,26 @@
             songs: [],
             newSong: null
         };
-
+        
         vm.nextStep = function() {
             vm.data.step += 1;
         };
-
+        
         vm.prevStep = function () {
             vm.data.step -= 1;
         };
-
-        $scope.searchFriend = function () {
-            if ($scope.data.newFriend != null) {
-                $scope.data.friends.push($scope.data.newFriend);
-                $scope.data.newFriend = null;
+        
+        vm.searchFriend = function () {
+            if (vm.data.newFriend != null) {
+                vm.data.friends.push(vm.data.newFriend);
+                vm.data.newFriend = null;
             }
         };
-
-        $scope.searchSong = function () {
-            if ($scope.data.newSong != null) {
-                $scope.data.songs.push($scope.data.newSong);
-                $scope.data.newSong = null;
+        
+        vm.searchSong = function () {
+            if (vm.data.newSong != null) {
+                vm.data.songs.push(vm.data.newSong);
+                vm.data.newSong = null;
             }
         }
     }
