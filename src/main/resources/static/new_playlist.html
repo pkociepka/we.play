@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </form>
-            <button class="btn btn-primary" ng-disabled="vm.data.step == 1" ng-click="prevStep()">Previous</button>
+            <button class="btn btn-primary" ng-disabled="vm.data.step == 1" ng-click="vm.prevStep()">Previous</button>
             <button class="btn btn-primary" ng-show="vm.data.step == 4">Generate</button>
             <button class="btn btn-primary" ng-click="vm.nextStep()" ng-hide="vm.data.step == 4">Next</button>
         </div>
