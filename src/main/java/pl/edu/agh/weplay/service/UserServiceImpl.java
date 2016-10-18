@@ -7,6 +7,7 @@ import pl.edu.agh.weplay.domain.Authority;
 import pl.edu.agh.weplay.domain.User;
 import pl.edu.agh.weplay.repository.AuthorityRepository;
 import pl.edu.agh.weplay.repository.UserRepository;
+import pl.edu.agh.weplay.security.SecurityUtils;
 import pl.edu.agh.weplay.service.util.RandomUtil;
 import pl.edu.agh.weplay.web.rest.dto.UserDTO;
 
@@ -17,7 +18,7 @@ import java.util.Set;
 /**
  * Created by P on 18.10.2016.
  */
-@Service
+
 @Transactional
 public class UserServiceImpl implements UserService {
 
@@ -49,11 +50,19 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    public void changePassword(String password) {
+        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
+            String encryptedPassword = passwordEncoder.encode(password);
+            u.setPassword(encryptedPassword);
+            userRepository.save(u);
+        });
+    }
+
     public User getUserById(Long id) {
-        return userRepository.findByID(id);
+        return userRepository.findOneByID(id).get();
     }
 
     public User getUserByLogin(String login) {
-        return userRepository.findByLogin(login);
+        return userRepository.findOneByLogin(login).get();
     }
 }
