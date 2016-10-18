@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/weplay?useSSL=false
+    username: root
+    password:
+    driverClassName: com.mysql.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    databasePlatform: org.hibernate.dialect.MySQLDialect
