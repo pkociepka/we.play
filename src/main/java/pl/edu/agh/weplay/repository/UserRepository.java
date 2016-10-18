@@ -9,7 +9,7 @@ import java.util.Optional;
  * Created by P on 18.10.2016.
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findOneByID(Long id);
+    Optional<User> findOneById(Long id);
     Optional<User> findOneByLogin(String login);
 
     @Override
