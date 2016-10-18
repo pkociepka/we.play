@@ -1,6 +1,7 @@
 package pl.edu.agh.weplay.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.weplay.domain.User;
 import pl.edu.agh.weplay.web.rest.dto.UserDTO;
 
@@ -9,6 +10,7 @@ import pl.edu.agh.weplay.web.rest.dto.UserDTO;
  */
 
 @Service
+@Transactional
 public interface UserService {
     User createUser(UserDTO userDTO);
     void changePassword(String password);

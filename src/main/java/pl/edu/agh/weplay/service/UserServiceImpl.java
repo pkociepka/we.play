@@ -19,7 +19,6 @@ import java.util.Set;
  * Created by P on 18.10.2016.
  */
 
-@Transactional
 public class UserServiceImpl implements UserService {
 
     @Inject
