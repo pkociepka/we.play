@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,8 @@ public class User implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "login", unique = true, length = 16, nullable = false)
+    @Column(name = "login", unique = true, nullable = false)
+    @Size(min = 1, max = 50)
     private String login;
 
     @JsonIgnore
