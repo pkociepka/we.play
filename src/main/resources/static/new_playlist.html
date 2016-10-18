@@ -2,81 +2,82 @@
     <div class="row">
         <div class="col-md-12">
             <form class="form-horizontal col-md-12" ng-submit="submitEvent(event)">
-                <div class="form-group" ng-show="vm.data.step == 1">
+                <div class="form-group" ng-show="vm.step == 1">
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 1 Add friends</p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <input class="form-control" ng-model="vm.data.newFriend" type="text"
+                                <input class="form-control" ng-model="vm.newFriend" type="text"
                                        placeholder="{{ 'new_playlist.enter_nickname' }}">
                                 <span class="input-group-btn">
-                                     <button class="btn btn-default" ng-click="vm.searchFriend()">
+                                     <button class="btn btn-default" ng-click="vm.searchFriend(vm.newFriend)">
                                          <span class="glyphicon glyphicon-search"/>
                                      </button>
                                 </span>
                             </div>
                             <div class="list-group">
-                                <span class="list-group-item" ng-repeat="f in vm.data.friends">{{f}}</span>
+                                <span class="list-group-item" ng-repeat="friend in vm.getFriends()"
+                                      ng-bind="friend"></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group" ng-show="vm.data.step == 2">
+                <div class="form-group" ng-show="vm.step == 2">
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 2 Choose activity</p>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="list-group">
-                                <button type="button" class="list-group-item">
-                                    <span class="fa fa-bicycle"></span>
-                                    <span>Training</span>
-                                </button>
-                                <button type="button" class="list-group-item">
-                                    <span class="fa fa-birthday-cake"></span>
-                                    <span>Party</span>
-                                </button>
-                                <button type="button" class="list-group-item">
-                                    <span class="fa fa-tree"></span>
-                                    <span>Hiking</span>
-                                </button>
-                                <button type="button" class="list-group-item">
-                                    <span class="fa fa-bed"></span>
-                                    <span>Sleeping</span>
-                                </button>
-                            </div>
+                            <table class="table" role="tablist">
+                                <tr ng-click="{active: vm.setActivity('Training')}">
+                                    <td class="fa fa-bicycle"></td>
+                                    <td>Training</td>
+                                </tr>
+                                <tr ng-click="{active: vm.setActivity('Party')}">
+                                    <td class="fa fa-birthday-cake"></td>
+                                    <td>Party</td>
+                                </tr>
+                                <tr ng-click="{active: vm.setActivity('Hiking')}">
+                                    <td class="fa fa-tree"></td>
+                                    <td>Hiking</td>
+                                </tr>
+                                <tr ng-click="{active: vm.setActivity('Sleeping')}">
+                                    <td class="fa fa-bed"></td>
+                                    <td>Sleeping</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="form-group" ng-show="vm.data.step == 3">
+                <div class="form-group" ng-show="vm.step == 3">
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 3 Set parameters</p>
                     <div class="row">
                         <div class="col-md-5">
                             <span class="fa fa-bolt"></span>
                             <span>Energy</span>
-                            <input type="range">
+                            <input type="range" ng-model="vm.params.energy">
                         </div>
                         <div class="col-md-5">
                             <span class="fa fa-music"></span>
                             <span>Dancability</span>
-                            <input type="range">
+                            <input type="range" ng-model="vm.params.dance">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-5">
                             <span class="fa fa-smile-o"></span>
                             <span>Mood</span>
-                            <input type="range">
+                            <input type="range" ng-model="vm.params.mood">
                         </div>
                         <div class="col-md-5">
                             <span class="fa fa-fire-extinguisher"></span>
                             <span>Hottness</span>
-                            <input type="range">
+                            <input type="range" ng-model="vm.params.hot">
                         </div>
                     </div>
                 </div>
-                <div class="form-group" ng-show="vm.data.step == 4">
+                <div class="form-group" ng-show="vm.step == 4">
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 4 Add must-hear songs</p>
                     <div class="row">
@@ -97,9 +98,9 @@
                     </div>
                 </div>
             </form>
-            <button class="btn btn-primary" ng-disabled="vm.data.step == 1" ng-click="vm.prevStep()">Previous</button>
-            <button class="btn btn-primary" ng-show="vm.data.step == 4">Generate</button>
-            <button class="btn btn-primary" ng-click="vm.nextStep()" ng-hide="vm.data.step == 4">Next</button>
+            <button class="btn btn-primary" ng-disabled="vm.step == 1" ng-click="vm.prevStep()">Previous</button>
+            <button class="btn btn-primary" ng-show="vm.step == 4" ng-click="vm.generate()">Generate</button>
+            <button class="btn btn-primary" ng-click="vm.nextStep()" ng-hide="vm.step == 4">Next</button>
         </div>
     </div>
 </div>

@@ -1,41 +1,50 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('weplay')
         .controller('NewPlaylistController', NewPlaylistController);
 
-    function NewPlaylistController  () {
-        var vm = this;
 
-        vm.data = {
-            step: 1,
-            friends: [],
-            newFriend: null,
-            songs: [],
-            newSong: null
+    NewPlaylistController.$inject = ['PreferencesFactory'];
+
+    function NewPlaylistController(PreferencesFactory) {
+        var vm = this;
+        vm.step = 1;
+        vm.newFriend = null;
+        vm.newSong = null;
+
+        //step 1
+        vm.getFriends = PreferencesFactory.getFriends;
+        vm.searchFriend = PreferencesFactory.addNewFriend;
+
+        //step 2
+        vm.params = {
+            energy: 50,
+            hot: 50,
+            dance: 50,
+            mood: 50
         };
-        
-        vm.nextStep = function() {
-            vm.data.step += 1;
+
+        //step 3
+        vm.setActivity = PreferencesFactory.setActivity;
+
+        //step 4
+        vm.searchSong = PreferencesFactory.addNewSong;
+
+        vm.generate = generate;
+
+        vm.nextStep = function () {
+            vm.step += 1;
         };
-        
+
         vm.prevStep = function () {
-            vm.data.step -= 1;
+            vm.step -= 1;
         };
-        
-        vm.searchFriend = function () {
-            if (vm.data.newFriend != null) {
-                vm.data.friends.push(vm.data.newFriend);
-                vm.data.newFriend = null;
-            }
-        };
-        
-        vm.searchSong = function () {
-            if (vm.data.newSong != null) {
-                vm.data.songs.push(vm.data.newSong);
-                vm.data.newSong = null;
-            }
+
+        function generate() {
+            PreferencesFactory.sendPreferences(vm.params);
         }
+
     }
 })();

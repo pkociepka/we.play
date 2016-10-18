@@ -13,10 +13,6 @@
             templateUrl: 'home.html',
             controller: 'home',
             controllerAs: 'vm'
-        // }).when('/login', {
-        //     templateUrl: 'login.html',
-        //     controller: 'navigation',
-        //     controllerAs: 'vm'
         }).when('/new', {
             templateUrl: 'new_playlist.html',
             controller: 'NewPlaylistController',
