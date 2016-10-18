@@ -13,12 +13,14 @@ import pl.edu.agh.weplay.web.rest.dto.UserDTO;
 
 import javax.inject.Inject;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
  * Created by P on 18.10.2016.
  */
-
+@Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Inject
@@ -58,10 +60,24 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepository.findOneByID(id).get();
+        return userRepository.findOneById(id).get();
     }
 
     public User getUserByLogin(String login) {
         return userRepository.findOneByLogin(login).get();
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<User> getUserWithAuthoritiesByLogin(String login) {
+        return userRepository.findOneByLogin(login).map(u -> {
+            u.getAuthorities().size();
+            return u;
+        });
+    }
+
+    public void deleteUser(String login) {
+        userRepository.findOneByLogin(login).ifPresent(u -> {
+            userRepository.delete(u);
+        });
     }
 }
