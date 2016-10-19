@@ -14,7 +14,7 @@ import java.sql.Date;
 public class TrackPlayedByUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
+    @Id @Column(name = "track_user_id")
     private Long id;
 
     @ManyToOne
