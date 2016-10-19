@@ -2,6 +2,11 @@
     <div class="row">
         <div class="col-md-12">
             <form class="form-horizontal col-md-12" ng-submit="submitEvent(event)">
+
+
+                <!---------------- STEP 1 ADD FRIENDS ---------------->
+
+
                 <div class="form-group" ng-show="vm.step == 1">
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 1 Add friends</p>
@@ -17,12 +22,16 @@
                                 </span>
                             </div>
                             <div class="list-group">
-                                <span class="list-group-item" ng-repeat="friend in vm.getFriends()"
-                                      ng-bind="friend"></span>
+                                <span class="list-group-item" ng-repeat="friend in vm.getFriends()" ng-bind="friend"></span>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!---------------- STEP 2 CHOOSE ACTIVITY ---------------->
+
+
                 <div class="form-group" ng-show="vm.step == 2">
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 2 Choose activity</p>
@@ -49,6 +58,11 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!---------------- STEP 3 SET PARAMETERS ---------------->
+
+
                 <div class="form-group" ng-show="vm.step == 3">
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 3 Set parameters</p>
@@ -77,22 +91,33 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!---------------- STEP 4 ADD MUST-HEAR SONGS  ---------------->
+
+
                 <div class="form-group" ng-show="vm.step == 4">
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 4 Add must-hear songs</p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <input class="form-control" ng-model="vm.data.newSong" type="text"
-                                       placeholder="{{ 'new_playlist.enter' }}">
+                                <input class="form-control" ng-model="vm.newSong" type="text"
+                                       placeholder="{{ 'new_playlist.enter' }}"
+                                       uib-typeahead="track.artists + ' - ' + track.name for track in vm.searchSong($viewValue)"
+                                       typeahead-loading="loadingTracks" typeahead-no-results="noResults">
                                 <span class="input-group-btn">
-                                     <button class="btn btn-default" ng-click="searchSong()">
-                                         <span class="glyphicon glyphicon-search"/>
+                                     <button class="btn btn-default" ng-click="vm.addSong()">
+                                         <span class="glyphicon glyphicon-plus" />
                                      </button>
                                 </span>
                             </div>
+                            <i ng-show="loadingTracks" class="glyphicon glyphicon-refresh"></i>
+                            <div ng-show="noResults">
+                                <i class="glyphicon glyphicon-remove"></i> No Results Found
+                            </div>
                             <div class="list-group">
-                                <span class="list-group-item" ng-repeat="s in vm.data.songs">{{s}}</span>
+                                <span class="list-group-item" ng-repeat="s in vm.songs track by $index">{{s.name}}</span>
                             </div>
                         </div>
                     </div>

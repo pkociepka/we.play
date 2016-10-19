@@ -6,13 +6,14 @@
         .controller('NewPlaylistController', NewPlaylistController);
 
 
-    NewPlaylistController.$inject = ['PreferencesFactory'];
+    NewPlaylistController.$inject = ['PreferencesFactory', '$http'];
 
-    function NewPlaylistController(PreferencesFactory) {
+    function NewPlaylistController(PreferencesFactory, $http) {
         var vm = this;
         vm.step = 1;
         vm.newFriend = null;
         vm.newSong = null;
+        vm.songs = [];
 
         //step 1
         vm.getFriends = PreferencesFactory.getFriends;
@@ -30,7 +31,7 @@
         vm.setActivity = PreferencesFactory.setActivity;
 
         //step 4
-        vm.searchSong = PreferencesFactory.addNewSong;
+        //vm.searchSong = PreferencesFactory.addNewSong;
 
         vm.generate = generate;
 
@@ -40,6 +41,16 @@
 
         vm.prevStep = function () {
             vm.step -= 1;
+        };
+
+        vm.searchSong = function (val) {
+            return $http.get('tracks/' + val).then(function (response) {
+                return response.data;
+            })
+        };
+
+        vm.addSong = function (val) {
+            vm.songs.push(val);
         };
 
         function generate() {
