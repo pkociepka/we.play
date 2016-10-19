@@ -1,6 +1,8 @@
 package pl.edu.agh.weplay.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.edu.agh.weplay.domain.preferences.Artist;
+import pl.edu.agh.weplay.domain.preferences.Genre;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -36,6 +38,22 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
     private Set<Authority> authorities = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "artist_liked_by_user",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "artist_id", referencedColumnName = "id")}
+    )
+    Set<Artist> artists = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "genre_liked_by_user",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")}
+    )
+    Set<Genre> genres = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -66,6 +84,14 @@ public class User implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Set<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
     }
 
     @Override
