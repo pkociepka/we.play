@@ -1,8 +1,6 @@
 package pl.edu.agh.weplay.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import pl.edu.agh.weplay.domain.preferences.Artist;
-import pl.edu.agh.weplay.domain.preferences.Genre;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -42,16 +40,14 @@ public class User implements Serializable {
     @JoinTable(
             name = "artist_liked_by_user",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "artist_id", referencedColumnName = "id")}
-    )
+            inverseJoinColumns = {@JoinColumn(name = "artist_id", referencedColumnName = "id")})
     Set<Artist> artists = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
             name = "genre_liked_by_user",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")}
-    )
+            inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
     Set<Genre> genres = new HashSet<>();
 
     public Long getId() {
@@ -92,6 +88,14 @@ public class User implements Serializable {
 
     public void setArtists(Set<Artist> artists) {
         this.artists = artists;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 
     @Override

@@ -1,10 +1,22 @@
 spring:
+  application:
+    name: WePlay
   datasource:
-    url: jdbc:mysql://localhost:3306/weplay?useSSL=false
+    url: jdbc:mysql://localhost:3306/weplay?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password:
     driverClassName: com.mysql.jdbc.Driver
 
   jpa:
     show-sql: true
-    databasePlatform: org.hibernate.dialect.MySQLDialect
+    databasePlatform: org.hibernate.dialect.MySQLInnoDialect
+    database: mysql
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+
+security:
+  basic:
+    enabled: false

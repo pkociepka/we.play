@@ -1,4 +1,4 @@
-package pl.edu.agh.weplay.domain.preferences;
+package pl.edu.agh.weplay.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.util.Set;
  * Created by P on 19.10.2016.
  */
 @Entity
-@Table(name = "track")
+@Table
 public class Track implements Serializable {
     private static final long serialVersionUID = 1L;
 

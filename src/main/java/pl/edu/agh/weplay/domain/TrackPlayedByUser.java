@@ -1,6 +1,4 @@
-package pl.edu.agh.weplay.domain.preferences;
-
-import pl.edu.agh.weplay.domain.User;
+package pl.edu.agh.weplay.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

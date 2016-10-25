@@ -1,21 +1,24 @@
-package pl.edu.agh.weplay.domain.preferences;
+package pl.edu.agh.weplay.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import pl.edu.agh.weplay.domain.User;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by P on 19.10.2016.
  */
 @Entity
-@Table(name = "genre")
+@Table
 public class Genre implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id @Column(name = "id")
     private String id;
+
+    @ManyToMany(mappedBy = "genres")
+    private Set<User> users;
 
     public String getId() {
         return id;

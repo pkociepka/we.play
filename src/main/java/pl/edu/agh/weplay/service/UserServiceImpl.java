@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getUserById(Long id) {
-        return userRepository.findOneById(id).get();
+        return userRepository.findOne(id);
     }
 
     public User getUserByLogin(String login) {
