@@ -1,6 +1,7 @@
 package pl.edu.agh.weplay.web.rest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import pl.edu.agh.weplay.service.UserService;
 import pl.edu.agh.weplay.web.rest.dto.UserDTO;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +38,29 @@ public class AccountResource {
 
     @Inject
     private TokenRepository tokenRepository;
+
+    @RequestMapping(value = "/register",
+            method = RequestMethod.POST,
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody UserDTO userDTO, HttpServletRequest request) {
+
+        HttpHeaders textPlainHeaders = new HttpHeaders();
+        textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
+
+        return userRepository.findOneByLogin(userDTO.getLogin())
+                .map(user -> new ResponseEntity<>("login already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
+                .orElseGet(() -> {
+                    User user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword());
+                    String baseUrl = request.getScheme() + // "http"
+                            "://" +                                // "://"
+                            request.getServerName() +              // "myhost"
+                            ":" +                                  // ":"
+                            request.getServerPort() +              // "80"
+                            request.getContextPath();              // "/myContextPath" or "" if deployed in root context
+
+                    return new ResponseEntity<>(HttpStatus.CREATED);
+                });
+    }
 
     @RequestMapping(
             value = "/account",
