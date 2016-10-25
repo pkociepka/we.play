@@ -11,9 +11,13 @@ import java.util.Optional;
 
 public interface UserService {
     User createUser(UserDTO userDTO);
+    User createUserInformation(String login, String password);
+    void updateUserInformation();
+    public void deleteUserInformation(String login);
     void changePassword(String password);
     User getUserById(Long id);
     User getUserByLogin(String login);
     Optional<User> getUserWithAuthoritiesByLogin(String login);
+    User getUserWithAuthorities();
     void deleteUser(String login);
 }

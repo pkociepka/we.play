@@ -1,5 +1,7 @@
 package pl.edu.agh.weplay.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,8 @@ import java.util.Set;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+    private final Logger log = LoggerFactory.getLogger(UserService.class);
+
 
     @Inject
     private UserRepository userRepository;
@@ -47,15 +51,53 @@ public class UserServiceImpl implements UserService {
         String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
         user.setPassword(encryptedPassword);
         userRepository.save(user);
-
+        log.debug("Created Information for User: {}", user);
         return user;
     }
 
-    public void changePassword(String password) {
+    @Override
+    public User createUserInformation(String login, String password) {
+        User user = new User();
+
+        user.setLogin(login);
+
+        String encryptedPassword = passwordEncoder.encode(password);
+        user.setPassword(encryptedPassword);
+
+        Authority authority = authorityRepository.findOne("ROLE_USER");
+        Set<Authority> authorities = new HashSet<>();
+        authorities.add(authority);
+        user.setAuthorities(authorities);
+
+//        user.setActivated(false);
+//        user.setActivationKey(RandomUtil.generateActivationKey());
+
+        userRepository.save(user);
+        log.debug("Created Information for User: {}", user);
+        return user;
+    }
+
+    public void updateUserInformation() {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
-            String encryptedPassword = passwordEncoder.encode(password);
-            u.setPassword(encryptedPassword);
             userRepository.save(u);
+            log.debug("Changed Information for User: {}", u);
+        });
+    }
+
+    public void deleteUserInformation(String login) {
+        userRepository.findOneByLogin(login).ifPresent(u -> {
+//            socialService.deleteUserSocialConnection(u.getLogin());
+            userRepository.delete(u);
+            log.debug("Deleted User: {}", u);
+        });
+    }
+
+    public void changePassword(String password) {
+        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
+            String encryptedPassword = passwordEncoder.encode(password);
+            user.setPassword(encryptedPassword);
+            userRepository.save(user);
+            log.debug("Changed password for User: {}", user);
         });
     }
 
@@ -73,6 +115,13 @@ public class UserServiceImpl implements UserService {
             u.getAuthorities().size();
             return u;
         });
+    }
+
+    @Transactional(readOnly = true)
+    public User getUserWithAuthorities() {
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        user.getAuthorities().size(); // eagerly load the association
+        return user;
     }
 
     public void deleteUser(String login) {
