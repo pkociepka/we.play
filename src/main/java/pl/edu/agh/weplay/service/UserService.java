@@ -15,9 +15,8 @@ public interface UserService {
     void updateUserInformation();
     public void deleteUserInformation(String login);
     void changePassword(String password);
-    User getUserById(Long id);
-    User getUserByLogin(String login);
     Optional<User> getUserWithAuthoritiesByLogin(String login);
+    User getUserWithAuthorities(Long id);
     User getUserWithAuthorities();
     void deleteUser(String login);
 }

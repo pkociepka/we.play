@@ -2,6 +2,7 @@ package pl.edu.agh.weplay.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,6 @@ import pl.edu.agh.weplay.security.SecurityUtils;
 import pl.edu.agh.weplay.service.util.RandomUtil;
 import pl.edu.agh.weplay.web.rest.dto.UserDTO;
 
-import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
 
-    @Inject
+    @Autowired
     private UserRepository userRepository;
 
-    @Inject
+    @Autowired
     AuthorityRepository authorityRepository;
 
-    @Inject
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = new HashSet<>();
-            userDTO.getAuthorities().stream().forEach(
+            userDTO.getAuthorities().forEach(
                     authority -> authorities.add(authorityRepository.findOne(authority))
             );
             user.setAuthorities(authorities);
@@ -69,9 +69,6 @@ public class UserServiceImpl implements UserService {
         authorities.add(authority);
         user.setAuthorities(authorities);
 
-//        user.setActivated(false);
-//        user.setActivationKey(RandomUtil.generateActivationKey());
-
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;
@@ -79,6 +76,7 @@ public class UserServiceImpl implements UserService {
 
     public void updateUserInformation() {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
+            //Change fields like firstname, lastname, email etc
             userRepository.save(u);
             log.debug("Changed Information for User: {}", u);
         });
@@ -86,7 +84,6 @@ public class UserServiceImpl implements UserService {
 
     public void deleteUserInformation(String login) {
         userRepository.findOneByLogin(login).ifPresent(u -> {
-//            socialService.deleteUserSocialConnection(u.getLogin());
             userRepository.delete(u);
             log.debug("Deleted User: {}", u);
         });
@@ -101,20 +98,19 @@ public class UserServiceImpl implements UserService {
         });
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findOneById(id).get();
-    }
-
-    public User getUserByLogin(String login) {
-        return userRepository.findOneByLogin(login).get();
-    }
-
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneByLogin(login).map(u -> {
             u.getAuthorities().size();
             return u;
         });
+    }
+
+    @Transactional(readOnly = true)
+    public User getUserWithAuthorities(Long id) {
+        User user = userRepository.findOne(id);
+        user.getAuthorities().size(); // eagerly load the association
+        return user;
     }
 
     @Transactional(readOnly = true)
