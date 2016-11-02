@@ -31,6 +31,18 @@ public class Track implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
     private Set<Genre> genres = new HashSet<>();
 
+    @Column //[0, 1.0]
+    private float danceability;
+
+    @Column //[0, 1.0]
+    private float energy;
+
+    @Column //[0, 1.0]
+    private float instrumentalness;
+
+    @Column //[0, 1.0]
+    private float valence;
+
     public String getId() {
         return id;
     }
@@ -53,5 +65,37 @@ public class Track implements Serializable {
 
     public void setGenres(Set<Genre> genres) {
         this.genres = genres;
+    }
+
+    public float getDanceability() {
+        return danceability;
+    }
+
+    public void setDanceability(float danceability) {
+        this.danceability = danceability;
+    }
+
+    public float getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(float energy) {
+        this.energy = energy;
+    }
+
+    public float getInstrumentalness() {
+        return instrumentalness;
+    }
+
+    public void setInstrumentalness(float instrumentalness) {
+        this.instrumentalness = instrumentalness;
+    }
+
+    public float getValence() {
+        return valence;
+    }
+
+    public void setValence(float valence) {
+        this.valence = valence;
     }
 }
