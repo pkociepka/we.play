@@ -13,4 +13,4 @@
     function Register($resource) {
         return $resource('api/register', {}, {});
     }
-});
+})();
