@@ -10,8 +10,9 @@
 <div class="navbar navbar-inverse" ng-controller="navigation as vm" class="container">
     <ul class="nav navbar-nav navbar-right" role="tablist">
         <li ng-class="{active:vm.tab('home')}"><a href="#/">Home</a></li>
+        <li ng-class="{active:vm.tab('LoginController')}"><a href="" ng-click="vm.login()">Sign In</a></li>
         <li ng-class="{active:vm.tab('RegisterController')}"><a href="#/register">Register</a></li>
-        <li ng-class="{active:vm.tab('NewPlaylistController')}"><a href="#/new">New playlist</a></li>
+        <li ng-show="vm.isAuthenticated" ng-class="{active:vm.tab('NewPlaylistController')}"><a href="#/new">New playlist</a></li>
     </ul>
 
 </div>
