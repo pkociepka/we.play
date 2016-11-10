@@ -27,6 +27,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    public UserDTO() {
+
+    }
+
     public UserDTO(User user) {
         this(user.getLogin(), null,
                 user.getAuthorities().stream()
