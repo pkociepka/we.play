@@ -6,7 +6,7 @@
 
     angular
         .module('weplay')
-        .factory('Reqister', Register);
+        .factory('Register', Register);
 
     Register.$inject = ['$resource'];
 
