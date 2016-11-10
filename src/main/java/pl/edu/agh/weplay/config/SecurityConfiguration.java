@@ -49,31 +49,36 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
+                .httpBasic().and().csrf().disable()
+//            .and()
+                .authorizeRequests()
+                .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
+                .anyRequest().permitAll();
+//            .and()
+//                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 //            .and()
 //                .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
 //                .exceptionHandling()
 //                .accessDeniedHandler(new CustomAccessDeniedHandler())
 //                .authenticationEntryPoint(authenticationEntryPoint)
-//        https://github.com/pkociepka/we.play/blob/master/src/main/java/org/weplay/config/SecurityConfiguration.java
-            .and()
-                .formLogin()
-                .loginProcessingUrl("/api/authentication") //?
-                .successHandler(authenticationSuccessHandler)
-                .failureHandler(authenticationFailureHandler)
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .permitAll()
-            .and()
-                .logout()
-                .logoutUrl("/api/logout")
-                .logoutSuccessHandler(logoutSuccessHandler)
-                .deleteCookies("JSESSIONID")
-                .permitAll()
-            .and()
-                .authorizeRequests()
-                .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
-                .anyRequest().authenticated();
+//            .and()
+//                .formLogin()
+//                .loginProcessingUrl("/api/authentication") //?
+//                .successHandler(authenticationSuccessHandler)
+//                .failureHandler(authenticationFailureHandler)
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .permitAll()
+//            .and()
+//                .logout()
+//                .logoutUrl("/api/logout")
+//                .logoutSuccessHandler(logoutSuccessHandler)
+//                .deleteCookies("JSESSIONID")
+//                .permitAll()
+//            .and()
+//                .authorizeRequests()
+//                .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
+//                .anyRequest().authenticated();
     }
 
     @Autowired
