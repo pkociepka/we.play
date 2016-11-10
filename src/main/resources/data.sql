@@ -1,0 +1,1 @@
+INSERT INTO authority VALUES ("ROLE_USER"), ("ROLE_ADMIN");
