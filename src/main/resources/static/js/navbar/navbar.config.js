@@ -17,6 +17,10 @@
             templateUrl: 'new_playlist.html',
             controller: 'NewPlaylistController',
             controllerAs: 'vm'
+        }).when('/register', {
+            templateUrl: 'js/account/register/register.html',
+            controller: 'RegisterController',
+            controllerAs: 'vm'
         }).otherwise('/');
 
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
