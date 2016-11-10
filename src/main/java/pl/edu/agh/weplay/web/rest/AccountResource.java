@@ -62,6 +62,13 @@ public class AccountResource {
                 });
     }
 
+    @RequestMapping(value = "/authenticate",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String isAuthenticated(HttpServletRequest request) {
+        return request.getRemoteUser();
+    }
+
     @RequestMapping(
             value = "/account",
             method = RequestMethod.GET,
