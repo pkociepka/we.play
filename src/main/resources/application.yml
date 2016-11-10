@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/weplay?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password:
+    password: root
     driverClassName: com.mysql.jdbc.Driver
 
   jpa:
@@ -12,8 +12,9 @@ spring:
     databasePlatform: org.hibernate.dialect.MySQLInnoDialect
     database: mysql
     open-in-view: false
+    generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       naming:
         strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
 
