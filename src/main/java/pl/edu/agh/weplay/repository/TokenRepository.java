@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.edu.agh.weplay.domain.Token;
 import pl.edu.agh.weplay.domain.User;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -12,5 +11,4 @@ import java.util.List;
  */
 public interface TokenRepository extends JpaRepository<Token, String> {
     List<Token> findByUser(User user);
-    List<Token> findByTokenDateBefore(LocalDate localDate);
 }
