@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //            .and()
                 .authorizeRequests()
                 .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
-                .anyRequest().permitAll();
+                .anyRequest().permitAll()
 //            .and()
 //                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 //            .and()
@@ -61,20 +61,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .exceptionHandling()
 //                .accessDeniedHandler(new CustomAccessDeniedHandler())
 //                .authenticationEntryPoint(authenticationEntryPoint)
-//            .and()
-//                .formLogin()
-//                .loginProcessingUrl("/api/authentication") //?
-//                .successHandler(authenticationSuccessHandler)
-//                .failureHandler(authenticationFailureHandler)
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                .permitAll()
-//            .and()
-//                .logout()
-//                .logoutUrl("/api/logout")
-//                .logoutSuccessHandler(logoutSuccessHandler)
-//                .deleteCookies("JSESSIONID")
-//                .permitAll()
+            .and()
+                .formLogin()
+                .loginProcessingUrl("/api/authentication") //?
+                .successHandler(authenticationSuccessHandler)
+                .failureHandler(authenticationFailureHandler)
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll()
+            .and()
+                .logout()
+                .logoutUrl("/api/logout")
+                .logoutSuccessHandler(logoutSuccessHandler)
+                .deleteCookies("JSESSIONID")
+                .permitAll();
 //            .and()
 //                .authorizeRequests()
 //                .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
@@ -84,10 +84,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
     }
 }
