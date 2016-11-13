@@ -5,26 +5,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * Created by P on 25.10.2016.
  */
 @Entity
 @Table
-public class Token implements Serializable {
+public class PersistentToken implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     private String series;
 
     @Column(name = "token_value") @NotNull @JsonIgnore
-    private String value;
+    private String tokenValue;
 
     @Column(name = "token_date") @JsonIgnore
-    private String date;
+    private LocalDate tokenDate;
 
     @Column(name = "ip_address")
-    private String iAddress;
+    private String ipAddress;
 
     @Column(name = "user_agent")
     private String userAgent;
@@ -41,28 +42,28 @@ public class Token implements Serializable {
         this.series = series;
     }
 
-    public String getValue() {
-        return value;
+    public String getTokenValue() {
+        return tokenValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setTokenValue(String value) {
+        this.tokenValue = value;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDate getTokenDate() {
+        return tokenDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTokenDate(LocalDate tokenDate) {
+        this.tokenDate = tokenDate;
     }
 
-    public String getiAddress() {
-        return iAddress;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public void setiAddress(String iAddress) {
-        this.iAddress = iAddress;
+    public void setIpAddress(String iAddress) {
+        this.ipAddress = iAddress;
     }
 
     public String getUserAgent() {
@@ -86,7 +87,7 @@ public class Token implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Token token = (Token) o;
+        PersistentToken token = (PersistentToken) o;
 
         return series.equals(token.series);
 
