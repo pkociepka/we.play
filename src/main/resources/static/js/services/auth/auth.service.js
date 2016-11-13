@@ -10,14 +10,12 @@
     function Auth ($rootScope, $state, $q, AuthServerProvider, Principal, LoginService, Register) {
         console.log("Auth service");
 
-        var service =  {
+        return {
             authorize: authorize,
             createAccount: createAccount,
             login: login,
             logout: logout
         };
-
-        return service;
 
         function authorize (force) {
             return Principal.identity(force).then(authThen);

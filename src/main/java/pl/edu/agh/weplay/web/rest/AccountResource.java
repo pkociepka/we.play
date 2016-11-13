@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.agh.weplay.domain.Token;
+import pl.edu.agh.weplay.domain.PersistentToken;
 import pl.edu.agh.weplay.domain.User;
-import pl.edu.agh.weplay.repository.TokenRepository;
+import pl.edu.agh.weplay.repository.PersistentTokenRepository;
 import pl.edu.agh.weplay.repository.UserRepository;
 import pl.edu.agh.weplay.security.SecurityUtils;
 import pl.edu.agh.weplay.service.UserService;
@@ -37,7 +37,7 @@ public class AccountResource {
     private UserService userService;
 
     @Inject
-    private TokenRepository tokenRepository;
+    private PersistentTokenRepository persistentTokenRepository;
 
     @RequestMapping(value = "/register",
             method = RequestMethod.POST,
@@ -112,9 +112,9 @@ public class AccountResource {
             value = "/account/session",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Token>> getCurrentSessions() {
+    public ResponseEntity<List<PersistentToken>> getCurrentSessions() {
         return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())
-                .map(user -> new ResponseEntity<>(tokenRepository.findByUser(user), HttpStatus.OK))
+                .map(user -> new ResponseEntity<>(persistentTokenRepository.findByUser(user), HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
 

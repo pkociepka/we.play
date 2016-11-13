@@ -11,14 +11,14 @@
         var vm = this;
 
         vm.authenticationError = false;
-        vm.cancel = cancel;
         vm.credentials = {};
-        vm.login = login;
-        vm.password = null;
-        vm.register = register;
-        vm.rememberMe = true;
-        vm.requestResetPassword = requestResetPassword;
         vm.username = null;
+        vm.password = null;
+        vm.rememberMe = true;
+        vm.cancel = cancel;
+        vm.login = login;
+        vm.register = register;
+        vm.requestResetPassword = requestResetPassword;
 
         $timeout(function (){angular.element('[ng-model="vm.username"]').focus();});
 
