@@ -1,10 +1,8 @@
 package pl.edu.agh.weplay.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -14,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.RememberMeServices;
 import pl.edu.agh.weplay.security.AjaxAuthenticationFailureHandler;
 import pl.edu.agh.weplay.security.AjaxAuthenticationSuccessHandler;
 import pl.edu.agh.weplay.security.AjaxLogoutSuccessHandler;
@@ -30,16 +29,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
+    private Properties properties;
+
+    @Autowired
     private UserDetailsService userDetailsService;
 
-    @Inject
+    @Autowired
     private AjaxAuthenticationSuccessHandler authenticationSuccessHandler;
 
-    @Inject
+    @Autowired
     private AjaxAuthenticationFailureHandler authenticationFailureHandler;
 
-    @Inject
+    @Autowired
     private AjaxLogoutSuccessHandler logoutSuccessHandler;
+
+    @Inject
+    private RememberMeServices rememberMeServices;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -51,39 +56,43 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic().and().csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
-                .antMatchers("/api/register").permitAll()
-                .antMatchers("/api/activate").permitAll()
-                .antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/api/**").authenticated()
-                .anyRequest().authenticated()
-//            .and()
-//                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-//            .and()
-//                .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
-//                .exceptionHandling()
-//                .accessDeniedHandler(new CustomAccessDeniedHandler())
-//                .authenticationEntryPoint(authenticationEntryPoint)
-            .and()
-                .formLogin()
-                .loginProcessingUrl("/api/authentication") //?
-                .successHandler(authenticationSuccessHandler)
-                .failureHandler(authenticationFailureHandler)
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .permitAll()
-            .and()
-                .logout()
-                .logoutUrl("/api/logout")
-                .logoutSuccessHandler(logoutSuccessHandler)
-                .deleteCookies("JSESSIONID")
-                .permitAll();
-//            .and()
-//                .authorizeRequests()
-//                .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
-//                .anyRequest().authenticated();
+            .csrf().disable()
+//        .and()
+//            .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
+//            .exceptionHandling()
+//            .accessDeniedHandler(new CustomAccessDeniedHandler())
+//            .authenticationEntryPoint(authenticationEntryPoint)
+//        .and()
+            .rememberMe()
+            .rememberMeServices(rememberMeServices)
+            .rememberMeParameter("remember-me")
+            .key(properties.getSecurity().getRememberMe().getKey())
+        .and()
+            .formLogin()
+            .loginProcessingUrl("/api/authentication")
+            .successHandler(authenticationSuccessHandler)
+            .failureHandler(authenticationFailureHandler)
+            .usernameParameter("username")
+            .passwordParameter("password")
+            .permitAll()
+        .and()
+            .logout()
+            .logoutUrl("/api/logout")
+            .logoutSuccessHandler(logoutSuccessHandler)
+            .deleteCookies("JSESSIONID", "CSRF-TOKEN")
+            .permitAll()
+        .and()
+            .headers()
+            .frameOptions()
+            .disable()
+        .and()
+            .authorizeRequests()
+            .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
+            .antMatchers("/api/register").permitAll()
+            .antMatchers("/api/activate").permitAll()
+            .antMatchers("/api/authenticate").permitAll()
+            .antMatchers("/api/**").authenticated()
+            .anyRequest().authenticated();
     }
 
     @Autowired
