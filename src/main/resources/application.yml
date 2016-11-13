@@ -21,3 +21,8 @@ spring:
 security:
   basic:
     enabled: false
+
+weplay:
+  security:
+    rememberMe:
+      key: b59c6f146879d5528a6bf382be207b5e9e626c5c
