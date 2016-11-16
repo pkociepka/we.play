@@ -3,17 +3,38 @@
 
     angular
         .module('weplay')
-        .controller('navigation', navigation);
+        .controller('NavbarController', NavbarController);
 
-    navigation.$inject = ['$route', 'LoginService'];
+    NavbarController.$inject = ['$state', 'Auth', 'LoginService', 'Principal'];
 
-    function navigation($route, LoginService) {
+    function NavbarController($state, Auth, LoginService, Principal) {
         var vm = this;
-        vm.tab = tab;
-        vm.login = LoginService.open;
 
-        function tab(route) {
-            return $route.current && route === $route.current.controller;
+        vm.isNavbarCollapsed = true;
+        vm.isAuthenticated = Principal.isAuthenticated;
+        vm.login = login;
+        vm.logout = logout;
+        vm.toggleNavbar = toggleNavbar;
+        vm.collapseNavbar = collapseNavbar;
+        vm.$state = $state;
+
+        function login() {
+            collapseNavbar();
+            LoginService.open();
+        }
+
+        function logout() {
+            collapseNavbar();
+            Auth.logout();
+            $state.go('home');
+        }
+
+        function toggleNavbar() {
+            vm.isNavbarCollapsed = !vm.isNavbarCollapsed;
+        }
+
+        function collapseNavbar() {
+            vm.isNavbarCollapsed = true;
         }
     }
 })();

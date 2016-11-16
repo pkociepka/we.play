@@ -8,18 +8,18 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.RememberMeServices;
-import pl.edu.agh.weplay.security.AjaxAuthenticationFailureHandler;
-import pl.edu.agh.weplay.security.AjaxAuthenticationSuccessHandler;
-import pl.edu.agh.weplay.security.AjaxLogoutSuccessHandler;
+import pl.edu.agh.weplay.security.*;
 
 import javax.inject.Inject;
 
 @Configuration
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -46,6 +46,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Inject
     private RememberMeServices rememberMeServices;
 
+    @Inject
+    private Http401UnauthorizedEntryPoint authenticationEntryPoint;
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
@@ -59,10 +62,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .csrf().disable()
 //        .and()
 //            .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
-//            .exceptionHandling()
-//            .accessDeniedHandler(new CustomAccessDeniedHandler())
-//            .authenticationEntryPoint(authenticationEntryPoint)
-//        .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(authenticationEntryPoint)
+        .and()
             .rememberMe()
             .rememberMeServices(rememberMeServices)
             .rememberMeParameter("remember-me")
@@ -87,12 +89,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .disable()
         .and()
             .authorizeRequests()
-            .antMatchers("/index.html", "/home.html", "/login.html", "/", "/user").permitAll()
             .antMatchers("/api/register").permitAll()
-            .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/authenticate").permitAll()
-            .antMatchers("/api/**").authenticated()
-            .anyRequest().authenticated();
+            .antMatchers("#/new").hasAuthority(AuthoritiesConstants.USER)
+            .antMatchers("/api/**").authenticated();
     }
 
     @Autowired

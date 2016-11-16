@@ -2,5 +2,11 @@
     'use strict';
 
     angular
-        .module('weplay', [ 'ui.bootstrap', 'ngRoute', 'ngResource', 'ui.router', 'ngStorage']);
+        .module('weplay', [ 'ui.bootstrap', 'ngResource', 'ui.router', 'ngStorage']).run(run);
+
+    run.$inject = ['stateHandler'];
+
+    function run(stateHandler) {
+        stateHandler.initialize();
+    }
 })();

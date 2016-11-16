@@ -56,6 +56,5 @@
         function generate() {
             PreferencesFactory.sendPreferences(vm.params);
         }
-
     }
 })();

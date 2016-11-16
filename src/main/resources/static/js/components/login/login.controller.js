@@ -41,13 +41,19 @@
             }).then(function () {
                 vm.authenticationError = false;
                 $uibModalInstance.close();
-                // If we're redirected to login, our
-                // previousState is already set in the authExpiredInterceptor. When login succesful go to stored state
-                if ($rootScope.redirected && $rootScope.previousStateName) {
-                    $state.go($rootScope.previousStateName, $rootScope.previousStateParams);
-                    $rootScope.redirected = false;
-                } else {
-                    $rootScope.$broadcast('authenticationSuccess');
+                if ($state.current.name === 'register' || $state.current.name === 'activate' ||
+                    $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
+                    $state.go('home');
+                }
+
+                $rootScope.$broadcast('authenticationSuccess');
+
+                // previousState was set in the authExpiredInterceptor before being redirected to login modal.
+                // since login is successful, go to stored previousState and clear previousState
+                if (Auth.getPreviousState()) {
+                    var previousState = Auth.getPreviousState();
+                    Auth.resetPreviousState();
+                    $state.go(previousState.name, previousState.params);
                 }
             }).catch(function () {
                 vm.authenticationError = true;

@@ -1,0 +1,13 @@
+<div ng-switch="vm.isAuthenticated()">
+    <h1>we.play()</h1>
+    <div class="alert alert-success" ng-switch-when="true">
+        You are logged in as user "{{vm.account.login}}".
+        <a class="alert-link" href="" ng-click="vm.logout()">Sign out</a>.
+    </div>
+
+    <div class="alert alert-warning" ng-switch-when="false">
+        You are not logged in.
+        <a class="alert-link" href="" ng-click="vm.login()">Sign in</a> or
+        <a class="alert-link" href="" ng-click="vm.register()">register a new account</a>.
+    </div>
+</div>

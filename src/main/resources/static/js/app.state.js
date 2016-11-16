@@ -8,11 +8,19 @@
         .module('weplay')
         .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider'];
+    stateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function stateConfig($stateProvider) {
+    function stateConfig($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
         $stateProvider.state('app', {
             abstract: true,
+            views: {
+                'navbar@': {
+                    templateUrl: 'js/navbar/navbar.html',
+                    controller: 'NavbarController',
+                    controllerAs: 'vm'
+                }
+            },
             resolve: {
                 authorize: ['Auth',
                     function (Auth) {

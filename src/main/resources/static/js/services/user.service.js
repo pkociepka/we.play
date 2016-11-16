@@ -11,7 +11,7 @@
     User.$inject = ['$resource'];
 
     function User ($resource) {
-        var service = $resource('api/users/:login', {}, {
+        return $resource('api/users/:login', {}, {
             'query': {method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
@@ -20,11 +20,9 @@
                     return data;
                 }
             },
-            'save': { method:'POST' },
-            'update': { method:'PUT' },
-            'delete':{ method:'DELETE'}
+            'save': {method: 'POST'},
+            'update': {method: 'PUT'},
+            'delete': {method: 'DELETE'}
         });
-
-        return service;
     }
 })();
