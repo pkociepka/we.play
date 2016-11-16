@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Table
 public class PersistentToken implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final int MAX_USER_AGENT_LEN = 255;
 
     @Id
     private String series;
@@ -21,10 +23,11 @@ public class PersistentToken implements Serializable {
     @Column(name = "token_value") @NotNull @JsonIgnore
     private String tokenValue;
 
-    @Column(name = "token_date") @JsonIgnore
+    @Column(name = "token_date")
     private LocalDate tokenDate;
 
-    @Column(name = "ip_address")
+    @Size(min = 0, max = 39)
+    @Column(name = "ip_address", length = 39)
     private String ipAddress;
 
     @Column(name = "user_agent")
@@ -71,7 +74,11 @@ public class PersistentToken implements Serializable {
     }
 
     public void setUserAgent(String userAgent) {
-        this.userAgent = userAgent;
+        if (userAgent.length() >= MAX_USER_AGENT_LEN) {
+            this.userAgent = userAgent.substring(0, MAX_USER_AGENT_LEN - 1);
+        } else {
+            this.userAgent = userAgent;
+        }
     }
 
     public User getUser() {

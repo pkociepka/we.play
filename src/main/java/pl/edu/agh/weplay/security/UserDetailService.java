@@ -7,12 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import pl.edu.agh.weplay.domain.Authority;
 import pl.edu.agh.weplay.domain.User;
 import pl.edu.agh.weplay.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by P on 25.10.2016.
@@ -25,15 +24,15 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        String lowercaseLogin = login.toLowerCase(Locale.ENGLISH);
+        Optional<User> userFromDatabase = userRepository.findOneByLogin(lowercaseLogin);
 
-        User user = userRepository.findOneByLogin(login).orElseThrow(() -> new UsernameNotFoundException(login));
-
-        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (Authority authority : user.getAuthorities()) {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getName());
-            grantedAuthorities.add(grantedAuthority);
-        }
-
-        return new org.springframework.security.core.userdetails.User(login, user.getPassword(), grantedAuthorities);
+        return userFromDatabase.map(user -> {
+            List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
+                    .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+                    .collect(Collectors.toList());
+            return new org.springframework.security.core.userdetails.User(lowercaseLogin, user.getPassword(), grantedAuthorities);
+        }).orElseThrow(() ->
+                new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database"));
     }
 }
