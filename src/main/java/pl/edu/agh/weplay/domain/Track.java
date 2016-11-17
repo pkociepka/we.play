@@ -16,20 +16,8 @@ public class Track implements Serializable {
     @Id @Column(name = "id")
     private String id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "track_artist",
-            joinColumns = {@JoinColumn(name = "track_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "artist_id", referencedColumnName = "id")}
-    )
-    private Set<Artist> artists= new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "track_genre",
-            joinColumns = {@JoinColumn(name = "track_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
-    private Set<Genre> genres = new HashSet<>();
+    @Column
+    private String name;
 
     @Column //[0, 1.0]
     private float danceability;
@@ -43,6 +31,19 @@ public class Track implements Serializable {
     @Column //[0, 1.0]
     private float valence;
 
+    @ManyToMany(mappedBy = "tracks")
+    private Set<User> users;
+
+    @ManyToMany(mappedBy = "tracks")
+    private Set<Artist> artists;
+
+    @ManyToMany
+    @JoinTable(
+            name = "genre_by_track",
+            joinColumns = {@JoinColumn(name = "track_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
+    private Set<Genre> genres = new HashSet<>();
+
     public String getId() {
         return id;
     }
@@ -51,20 +52,12 @@ public class Track implements Serializable {
         this.id = id;
     }
 
-    public Set<Artist> getArtists() {
-        return artists;
+    public String getName() {
+        return name;
     }
 
-    public void setArtists(Set<Artist> artists) {
-        this.artists = artists;
-    }
-
-    public Set<Genre> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(Set<Genre> genres) {
-        this.genres = genres;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getDanceability() {
@@ -97,5 +90,29 @@ public class Track implements Serializable {
 
     public void setValence(float valence) {
         this.valence = valence;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 }

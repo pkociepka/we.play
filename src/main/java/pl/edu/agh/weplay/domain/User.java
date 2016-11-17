@@ -39,17 +39,24 @@ public class User implements Serializable {
 
     @ManyToMany
     @JoinTable(
-            name = "artist_liked_by_user",
+            name = "artist_by_user",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "artist_id", referencedColumnName = "id")})
-    Set<Artist> artists = new HashSet<>();
+    private Set<Artist> artists = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
-            name = "genre_liked_by_user",
+            name = "genre_by_user",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
-    Set<Genre> genres = new HashSet<>();
+    private Set<Genre> genres = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "track_by_user",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "track_id", referencedColumnName = "id")})
+    private Set<Track> tracks = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -97,6 +104,14 @@ public class User implements Serializable {
 
     public void setGenres(Set<Genre> genres) {
         this.genres = genres;
+    }
+
+    public Set<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
     }
 
     @Override

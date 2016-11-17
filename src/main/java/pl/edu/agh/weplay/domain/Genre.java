@@ -20,11 +20,41 @@ public class Genre implements Serializable {
     @ManyToMany(mappedBy = "genres")
     private Set<User> users;
 
+    @ManyToMany(mappedBy = "genres")
+    private Set<Artist> artists;
+
+    @ManyToMany(mappedBy = "genres")
+    private Set<Track> tracks;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
+    }
+
+    public Set<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
     }
 }
