@@ -1,13 +1,15 @@
 {
   "name": "weplay",
-  "version": "1.0.0",
   "description": "weplay",
   "main": "index.js",
+  "authors": [
+    "Kurtzz"
+  ],
   "dependencies": {
     "angular": "^1.5.8",
     "angular-cookie": "^4.1.0",
     "angular-resource": "^1.5.8",
-    "angular-ui-bootstrap": "^2.2.0",
+    "angular-bootstrap": "^2.2.0",
     "angular-ui-router": "^0.3.2",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
@@ -15,10 +17,13 @@
     "json3": "^3.3.2",
     "ngstorage": "^0.3.11"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Kurtzz",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/pkociepka/we.play",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }

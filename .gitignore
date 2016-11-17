@@ -21,4 +21,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-/src/main/resources/static/node_modules/
+/src/main/resources/static/libs/
