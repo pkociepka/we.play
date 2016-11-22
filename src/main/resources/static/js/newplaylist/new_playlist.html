@@ -14,7 +14,7 @@
                         <div class="col-md-6">
                             <div class="input-group">
                                 <input class="form-control" ng-model="vm.newFriend" type="text"
-                                       placeholder="{{ 'new_playlist.enter_nickname' }}">
+                                       placeholder="Search for users...">
                                 <span class="input-group-btn">
                                      <button class="btn btn-default" ng-click="vm.searchFriend(vm.newFriend)">
                                          <span class="glyphicon glyphicon-search"/>
@@ -103,13 +103,13 @@
                         <div class="col-md-6">
                             <div class="input-group">
                                 <input class="form-control" ng-model="vm.newSong" type="text"
-                                       placeholder="{{ 'new_playlist.enter' }}"
+                                       placeholder="Search for tracks..."
                                        uib-typeahead="track.artists + ' - ' + track.name + ' [' + track.album + ']' for track in vm.searchSong($viewValue)"
                                        typeahead-loading="loadingTracks" typeahead-no-results="noResults"
                                        typeahead-on-select='vm.onSelect($item, $model, $label)'>
                                 <span class="input-group-btn">
                                      <button class="btn btn-default" ng-click="vm.addSong($viewValue)">
-                                         <span class="glyphicon glyphicon-plus" />
+                                         <span class="glyphicon glyphicon-plus"></span>
                                      </button>
                                 </span>
                             </div>
