@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE urlrewrite
+        PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite use-query-string="true">
+
+    <rule>
+        <from>^/callback(.*)$</from>
+        <to type="redirect">/#/callback?$1</to>
+    </rule>
+
+    <rule>
+        <from>^/register$</from>
+        <to type="redirect">/#/register</to>
+    </rule>
+
+    <rule>
+        <from>^/new$</from>
+        <to type="redirect">/#/new</to>
+    </rule>
+
+    <rule>
+        <from>^/spotify_login$</from>
+        <to type="redirect">/#/spotify_login</to>
+    </rule>
+
+</urlrewrite>
