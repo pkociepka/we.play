@@ -8,9 +8,9 @@
         .module('weplay')
         .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+    stateConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
-    function stateConfig($stateProvider, $urlRouterProvider) {
+    function stateConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         $urlRouterProvider.otherwise('/');
         $stateProvider.state('app', {
             abstract: true,
@@ -28,6 +28,9 @@
                     }
                 ]
             }
+        });
+        $locationProvider.html5Mode({
+            enabled: true
         });
     }
 })();
