@@ -13,6 +13,7 @@
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
         vm.login = login;
+        vm.loginWithSpotify = loginWithSpotify;
         vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
@@ -21,6 +22,10 @@
         function login() {
             collapseNavbar();
             LoginService.open();
+        }
+
+        function loginWithSpotify() {
+            $state.go('spotify_login');
         }
 
         function logout() {
