@@ -14,16 +14,33 @@
                         <div class="col-md-6">
                             <div class="input-group">
                                 <input class="form-control" ng-model="vm.newFriend" type="text"
-                                       placeholder="Search for users...">
+                                       placeholder="Search for users..."
+                                       uib-typeahead="user.login for user in vm.searchUsers($viewValue)"
+                                       typeahead-loading="loadingUsers" typeahead-no-results="noResultsUsers"
+                                       typeahead-on-select='vm.onSelectFriend($item, $model, $label)'>
                                 <span class="input-group-btn">
-                                     <button class="btn btn-default" ng-click="vm.searchFriend(vm.newFriend)">
-                                         <span class="glyphicon glyphicon-search"/>
+                                     <button class="btn btn-default" ng-click="vm.addFriend($viewValue)">
+                                         <span class="glyphicon glyphicon-plus"></span>
                                      </button>
                                 </span>
                             </div>
-                            <div class="list-group">
-                                <span class="list-group-item" ng-repeat="friend in vm.getFriends()" ng-bind="friend"></span>
+                            <i ng-show="loadingUsers" class="glyphicon glyphicon-refresh"></i>
+                            <div ng-show="noResultsUsers">
+                                <i class="glyphicon glyphicon-remove"></i> No Results Found
                             </div>
+                            <table class="table table-striped" ng-show="vm.friends.length > 0">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Login</th>
+                                </tr>
+                                <tr ng-repeat="friend in vm.friends track by $index">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{friend.login}}</td>
+                                    <td nowrap=nowrap>
+                                        <button ng-click="vm.deleteFriend($index)"><i class="glyphicon glyphicon-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

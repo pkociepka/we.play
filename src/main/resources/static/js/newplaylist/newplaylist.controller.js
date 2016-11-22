@@ -6,14 +6,15 @@
         .controller('NewPlaylistController', NewPlaylistController);
 
 
-    NewPlaylistController.$inject = ['PreferencesFactory', 'Spotify'];
+    NewPlaylistController.$inject = ['PreferencesFactory', '$http', 'Spotify'];
 
-    function NewPlaylistController(PreferencesFactory, Spotify) {
+    function NewPlaylistController(PreferencesFactory, $http, Spotify) {
         var vm = this;
         vm.step = 1;
         vm.newFriend = null;
         vm.newSong = null;
         vm.songs = [];
+        vm.friends = [];
 
         //step 1
         vm.getFriends = PreferencesFactory.getFriends;
@@ -41,6 +42,13 @@
 
         vm.prevStep = function () {
             vm.step -= 1;
+        };
+
+        vm.searchUsers = function (val) {
+            return $http.get('api/users/contains/' + val).then(function (response) {
+                console.log(response.data);
+                return response.data;
+            })
         };
 
         vm.searchSong = function (val) {
@@ -77,8 +85,24 @@
             })
         };
 
+        vm.addFriend = function () {
+            if (vm.friends.indexOf(vm.newFriend) != -1) {
+                return;
+            }
+            vm.friends.push(vm.newFriend);
+            vm.friends.sort(function (a, b) {
+                var left = a.login.toLowerCase();
+                var right = b.login.toLowerCase();
+                return left > right ? 1 : left < right ? -1 : 0;
+            })
+        };
+
         vm.deleteSong = function (index) {
             vm.songs.splice(index, 1);
+        };
+
+        vm.deleteFriend = function (index) {
+            vm.friends.splice(index, 1);
         };
 
         vm.onSelect = function ($item, $model, $label) {
@@ -86,6 +110,13 @@
             vm.model = $model;
             vm.label = $label;
             vm.newSong = $item;
+        };
+
+        vm.onSelectFriend = function ($item, $model, $label) {
+            // vm.item = $item;
+            // vm.model = $model;
+            // vm.label = $label;
+            vm.newFriend = $item;
         };
 
         function generate() {
