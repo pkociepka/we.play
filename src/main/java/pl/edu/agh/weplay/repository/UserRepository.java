@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import pl.edu.agh.weplay.domain.User;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -13,6 +14,8 @@ import java.util.Optional;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneByLogin(String login);
+
+    List<User> findOneByLoginIgnoreCaseContaining(String login);
 
     @Query(value = "select distinct user from User user left join fetch user.authorities",
             countQuery = "select count(user) from User user")

@@ -15,6 +15,7 @@ import pl.edu.agh.weplay.service.util.RandomUtil;
 import pl.edu.agh.weplay.web.rest.dto.UserDTO;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -96,6 +97,11 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             log.debug("Changed password for User: {}", user);
         });
+    }
+
+    @Transactional(readOnly = true)
+    public List<User> getUserByLoginIgnoreCaseContaining(String login) {
+        return userRepository.findOneByLoginIgnoreCaseContaining(login);
     }
 
     @Transactional(readOnly = true)

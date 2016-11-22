@@ -21,6 +21,7 @@ import pl.edu.agh.weplay.web.rest.util.PaginationUtil;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +83,18 @@ public class UserResource {
                 .map(UserDTO::new)
                 .map(userDTO -> new ResponseEntity<>(userDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @RequestMapping(
+            value = "/users/contains/{login:[_'.@a-z0-9-]+}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UserDTO>> getUserContains(@PathVariable String login) {
+
+        List<UserDTO> userDTOList = new ArrayList<>();
+        userService.getUserByLoginIgnoreCaseContaining(login).stream().map(UserDTO::new).forEach(userDTO -> userDTOList.add(userDTO));
+
+        return new ResponseEntity<>(userDTOList, HttpStatus.OK);
     }
 
     @RequestMapping(
