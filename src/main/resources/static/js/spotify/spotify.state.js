@@ -27,7 +27,7 @@
         });
 
         SpotifyProvider.setClientId('1f04ae7d7737482eb47594961c217f15');
-        SpotifyProvider.setRedirectUri('http://localhost:8080/callback');
+        SpotifyProvider.setRedirectUri('http://localhost:8080/spotify_callback.html');
         SpotifyProvider.setScope('user-read-private playlist-read-private playlist-modify-private playlist-modify-public');
     }
 })();

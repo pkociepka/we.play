@@ -8,7 +8,7 @@
 
     <rule>
         <from>^/callback(.*)$</from>
-        <to type="redirect">/#/callback?$1</to>
+        <to type="redirect">/#/callback$1</to>
     </rule>
 
     <rule>
