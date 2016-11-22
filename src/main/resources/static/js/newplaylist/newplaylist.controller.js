@@ -66,6 +66,9 @@
         };
 
         vm.addSong = function () {
+            if (vm.songs.indexOf(vm.newSong) != -1) {
+                return;
+            }
             vm.songs.push(vm.newSong);
             vm.songs.sort(function (a, b) {
                 var left = a.artists.toLowerCase();
