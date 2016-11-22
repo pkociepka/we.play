@@ -104,10 +104,11 @@
                             <div class="input-group">
                                 <input class="form-control" ng-model="vm.newSong" type="text"
                                        placeholder="{{ 'new_playlist.enter' }}"
-                                       uib-typeahead="track.artists + ' - ' + track.name for track in vm.searchSong($viewValue)"
-                                       typeahead-loading="loadingTracks" typeahead-no-results="noResults">
+                                       uib-typeahead="track.artists + ' - ' + track.name + ' [' + track.album + ']' for track in vm.searchSong($viewValue)"
+                                       typeahead-loading="loadingTracks" typeahead-no-results="noResults"
+                                       typeahead-on-select='vm.onSelect($item, $model, $label)'>
                                 <span class="input-group-btn">
-                                     <button class="btn btn-default" ng-click="vm.addSong()">
+                                     <button class="btn btn-default" ng-click="vm.addSong($viewValue)">
                                          <span class="glyphicon glyphicon-plus" />
                                      </button>
                                 </span>
@@ -116,9 +117,18 @@
                             <div ng-show="noResults">
                                 <i class="glyphicon glyphicon-remove"></i> No Results Found
                             </div>
-                            <div class="list-group">
-                                <span class="list-group-item" ng-repeat="s in vm.songs track by $index">{{s.name}}</span>
-                            </div>
+                            <table class="table table-striped" ng-show="vm.songs.length > 0">
+                                <tr>
+                                    <th>Artists</th>
+                                    <th>Title</th>
+                                    <th>Album</th>
+                                </tr>
+                                <tr ng-repeat="track in vm.songs track by $index">
+                                    <td>{{track.artists}}</td>
+                                    <td>{{track.name}}</td>
+                                    <td>{{track.album}}</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
