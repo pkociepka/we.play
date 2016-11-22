@@ -67,6 +67,15 @@
 
         vm.addSong = function () {
             vm.songs.push(vm.newSong);
+            vm.songs.sort(function (a, b) {
+                var left = a.artists.toLowerCase();
+                var right = b.artists.toLowerCase();
+                return left > right ? 1 : left < right ? -1 : 0;
+            })
+        };
+
+        vm.deleteSong = function (index) {
+            vm.songs.splice(index, 1);
         };
 
         vm.onSelect = function ($item, $model, $label) {
