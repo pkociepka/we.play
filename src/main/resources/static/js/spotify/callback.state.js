@@ -21,11 +21,6 @@
                     controller: 'CallbackController',
                     controllerAs: 'vm'
                 }
-            },
-            resolve: {
-                'urlFix': ['$location', function($location){
-                    $location.url($location.url().replace("#","?"));
-                }]
             }
         });
     }
