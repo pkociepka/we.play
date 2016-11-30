@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers(HttpMethod.OPTIONS, "/**")
-                .antMatchers("/js/**", "/node_modules/**", "/css/**");
+                .antMatchers("/*", "/js/**", "/libs/**");
     }
 
     @Override
@@ -93,7 +93,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/users/**").hasAuthority(AuthoritiesConstants.USER)
             .antMatchers("#/new").hasAuthority(AuthoritiesConstants.USER)
-            .antMatchers("/api/**").authenticated();
+            .antMatchers("/api/**").authenticated()
+            .anyRequest().authenticated();
     }
 
     @Autowired
