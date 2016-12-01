@@ -74,7 +74,7 @@
         };
 
         vm.addSong = function () {
-            if (vm.songs.indexOf(vm.newSong) != -1) {
+            if (vm.songs.indexOf(vm.newSong) != -1 || !vm.newSong) {
                 return;
             }
             vm.songs.push(vm.newSong);
@@ -86,7 +86,7 @@
         };
 
         vm.addFriend = function () {
-            if (vm.friends.indexOf(vm.newFriend) != -1) {
+            if (vm.friends.indexOf(vm.newFriend) != -1 || !vm.newFriend) {
                 return;
             }
             vm.friends.push(vm.newFriend);
