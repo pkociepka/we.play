@@ -86,27 +86,27 @@
                     <h1>Create new playlist</h1>
                     <p class="lead">Step 3 Set parameters</p>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-2">
                             <span class="fa fa-bolt"></span>
-                            <span>Energy</span>
-                            <input type="range" ng-model="vm.params.energy">
+                            <span>Energy</span><br>
+                            <span><rzslider rz-slider-model="vm.sliderEnergy.value" rz-slider-options="vm.sliderOptions" style="height: 200px;"></rzslider></span>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-2">
                             <span class="fa fa-music"></span>
-                            <span>Dancability</span>
-                            <input type="range" ng-model="vm.params.dance">
+                            <span>Dancability</span><br>
+                            <rzslider rz-slider-model="vm.sliderDancability.value" rz-slider-options="vm.sliderOptions" style="height: 200px;"></rzslider>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5">
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                        <div class="col-md-2">
                             <span class="fa fa-smile-o"></span>
-                            <span>Mood</span>
-                            <input type="range" ng-model="vm.params.mood">
+                            <span>Mood</span><br>
+                            <rzslider rz-slider-model="vm.sliderMood.value" rz-slider-options="vm.sliderOptions" style="height: 200px;"></rzslider>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-2">
                             <span class="fa fa-fire-extinguisher"></span>
-                            <span>Hottness</span>
-                            <input type="range" ng-model="vm.params.hot">
+                            <span>Hottness</span><br>
+                            <rzslider rz-slider-model="vm.sliderHottness.value" rz-slider-options="vm.sliderOptions" style="height: 200px;"></rzslider>
                         </div>
                     </div>
                 </div>

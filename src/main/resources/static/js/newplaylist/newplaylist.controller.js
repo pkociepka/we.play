@@ -16,6 +16,28 @@
         vm.songs = [];
         vm.friends = [];
 
+        vm.sliderOptions = {
+            showSelectionBar: true,
+            hideLimitLabels: true,
+            floor: 0,
+            ceil: 1,
+            step: 0.01,
+            precision: 2,
+            vertical: true
+        };
+        vm.sliderEnergy = {
+            value: 0.5
+        };
+        vm.sliderDancability = {
+            value: 0.5
+        };
+        vm.sliderMood = {
+            value: 0.5
+        };
+        vm.sliderHottness = {
+            value: 0.5
+        };
+
         //step 1
         vm.getFriends = PreferencesFactory.getFriends;
         vm.searchFriend = PreferencesFactory.addNewFriend;
