@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('weplay', [ 'ui.bootstrap', 'ngResource', 'ui.router', 'ngStorage', 'spotify', 'ngSanitize']).run(run);
+        .module('weplay', [ 'ui.bootstrap', 'ngResource', 'ui.router', 'ngStorage', 'spotify', 'ngSanitize', 'rzModule']).run(run);
 
     run.$inject = ['stateHandler'];
 
