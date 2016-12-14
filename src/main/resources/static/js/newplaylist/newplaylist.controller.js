@@ -6,9 +6,9 @@
         .controller('NewPlaylistController', NewPlaylistController);
 
 
-    NewPlaylistController.$inject = ['PreferencesFactory', '$http', 'Spotify'];
+    NewPlaylistController.$inject = ['PreferencesFactory', '$http', 'Spotify', '$state'];
 
-    function NewPlaylistController(PreferencesFactory, $http, Spotify) {
+    function NewPlaylistController(PreferencesFactory, $http, Spotify, $state) {
         var vm = this;
         vm.step = 1;
         vm.newFriend = null;
@@ -113,14 +113,13 @@
         };
 
         vm.onSelectFriend = function ($item, $model, $label) {
-            // vm.item = $item;
-            // vm.model = $model;
-            // vm.label = $label;
             vm.newFriend = $item;
         };
 
         function generate() {
-            PreferencesFactory.sendPreferences(vm.params);
+            //fixed value
+            $state.go('player', {songs:'5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe'});
+            // PreferencesFactory.sendPreferences(vm.params);
         }
     }
 })();

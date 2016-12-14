@@ -22,6 +22,11 @@
     </rule>
 
     <rule>
+        <from>^/player$</from>
+        <to type="redirect">/#/player</to>
+    </rule>
+
+    <rule>
         <from>^/spotify_login$</from>
         <to type="redirect">/#/spotify_login</to>
     </rule>
