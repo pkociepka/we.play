@@ -6,7 +6,7 @@
     "Kurtzz"
   ],
   "dependencies": {
-    "angular": "^1.5.8",
+    "angular": "^1.5.9",
     "angular-cookie": "^4.1.0",
     "angular-resource": "^1.5.8",
     "angular-bootstrap": "^2.2.0",
@@ -16,7 +16,8 @@
     "jquery": "^3.1.1",
     "json3": "^3.3.2",
     "ngstorage": "^0.3.11",
-    "angular-spotify": "^1.4.2"
+    "angular-spotify": "^1.4.2",
+    "angular-sanitize": "^1.6.0"
   },
   "license": "ISC",
   "homepage": "https://github.com/pkociepka/we.play",
