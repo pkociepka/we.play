@@ -51,40 +51,40 @@
                 <!---------------- STEP 2 CHOOSE ACTIVITY ---------------->
 
 
-                <div class="form-group" ng-show="vm.step == 2">
-                    <h1>Create new playlist</h1>
-                    <p class="lead">Step 2 Choose activity</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <table class="table" role="tablist">
-                                <tr ng-click="{active: vm.setActivity('Training')}">
-                                    <td class="fa fa-bicycle"></td>
-                                    <td>Training</td>
-                                </tr>
-                                <tr ng-click="{active: vm.setActivity('Party')}">
-                                    <td class="fa fa-birthday-cake"></td>
-                                    <td>Party</td>
-                                </tr>
-                                <tr ng-click="{active: vm.setActivity('Hiking')}">
-                                    <td class="fa fa-tree"></td>
-                                    <td>Hiking</td>
-                                </tr>
-                                <tr ng-click="{active: vm.setActivity('Sleeping')}">
-                                    <td class="fa fa-bed"></td>
-                                    <td>Sleeping</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="form-group" ng-show="vm.step == 2">-->
+                    <!--<h1>Create new playlist</h1>-->
+                    <!--<p class="lead">Step 2 Choose activity</p>-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-6">-->
+                            <!--<table class="table" role="tablist">-->
+                                <!--<tr ng-click="{active: vm.setActivity('Training')}">-->
+                                    <!--<td class="fa fa-bicycle"></td>-->
+                                    <!--<td>Training</td>-->
+                                <!--</tr>-->
+                                <!--<tr ng-click="{active: vm.setActivity('Party')}">-->
+                                    <!--<td class="fa fa-birthday-cake"></td>-->
+                                    <!--<td>Party</td>-->
+                                <!--</tr>-->
+                                <!--<tr ng-click="{active: vm.setActivity('Hiking')}">-->
+                                    <!--<td class="fa fa-tree"></td>-->
+                                    <!--<td>Hiking</td>-->
+                                <!--</tr>-->
+                                <!--<tr ng-click="{active: vm.setActivity('Sleeping')}">-->
+                                    <!--<td class="fa fa-bed"></td>-->
+                                    <!--<td>Sleeping</td>-->
+                                <!--</tr>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
 
 
                 <!---------------- STEP 3 SET PARAMETERS ---------------->
 
 
-                <div class="form-group" ng-show="vm.step == 3">
+                <div class="form-group" ng-show="vm.step == 2">
                     <h1>Create new playlist</h1>
-                    <p class="lead">Step 3 Set parameters</p>
+                    <p class="lead">Step 2 Set parameters</p>
                     <div class="row">
                         <div class="col-md-2">
                             <span class="fa fa-bolt"></span>
@@ -96,8 +96,6 @@
                             <span>Dancability</span><br>
                             <rzslider rz-slider-model="vm.sliderDancability.value" rz-slider-options="vm.sliderOptions" style="height: 200px;"></rzslider>
                         </div>
-                    <!--</div>-->
-                    <!--<div class="row">-->
                         <div class="col-md-2">
                             <span class="fa fa-smile-o"></span>
                             <span>Mood</span><br>
@@ -115,9 +113,9 @@
                 <!---------------- STEP 4 ADD MUST-HEAR SONGS  ---------------->
 
 
-                <div class="form-group" ng-show="vm.step == 4">
+                <div class="form-group" ng-show="vm.step == 3">
                     <h1>Create new playlist</h1>
-                    <p class="lead">Step 4 Add must-hear songs</p>
+                    <p class="lead">Step 3 Add must-hear songs</p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
@@ -158,8 +156,8 @@
                 </div>
             </form>
             <button class="btn btn-primary" ng-disabled="vm.step == 1" ng-click="vm.prevStep()">Previous</button>
-            <button class="btn btn-primary" ng-show="vm.step == 4" ng-click="vm.generate()">Generate</button>
-            <button class="btn btn-primary" ng-click="vm.nextStep()" ng-hide="vm.step == 4">Next</button>
+            <button class="btn btn-primary" ng-show="vm.step == 3" ng-click="vm.generate()">Generate</button>
+            <button class="btn btn-primary" ng-click="vm.nextStep()" ng-hide="vm.step == 3">Next</button>
         </div>
     </div>
 </div>
