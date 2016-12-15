@@ -48,7 +48,6 @@
 
         vm.searchUsers = function (val) {
             return $http.get('api/users/contains/' + val).then(function (response) {
-                console.log(response.data);
                 return response.data;
             })
         };
@@ -64,11 +63,11 @@
                         artists += ", " + items[i].artists[j].name;
                     }
                     list.push({
-                        id : items[i].id,
-                        uri : items[i].uri,
-                        artists : artists,
-                        name : items[i].name,
-                        album : items[i].album.name
+                        id: items[i].id,
+                        uri: items[i].uri,
+                        artists: artists,
+                        name: items[i].name,
+                        album: items[i].album.name
                     });
                 }
                 return list;
@@ -116,7 +115,26 @@
         };
 
         vm.generate = function () {
-            $state.go('player', {tracks:'5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe'});
+            angular.forEach(vm.users, function (value, key) {
+                $http.get('/api/spotifytoken/' + vm.users[key].login).then(
+                    function (response) {
+                        console.log(value); //user
+                        console.log(response.data); //token
+                    }, function (response) {
+                        console.log(value); //user
+                        console.log(response); //404 or sth
+                    }
+                );
+            });
+            angular.forEach(vm.tracks, function (value, key) {
+                console.log(value); //track
+            });
+            console.log("Energy: " + vm.sliderEnergy.value);
+            console.log("Dancability: " + vm.sliderDancability.value);
+            console.log("Mood: " + vm.sliderMood.value);
+            console.log("Hottness: " + vm.sliderHottness.value);
+
+            // $state.go('player', {tracks:'5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe'});
             // PreferencesFactory.sendPreferences(vm.params);
         }
     }
