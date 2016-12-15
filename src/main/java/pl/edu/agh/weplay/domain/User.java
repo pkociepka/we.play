@@ -1,6 +1,7 @@
 package pl.edu.agh.weplay.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -58,6 +59,9 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "track_id", referencedColumnName = "id")})
     private Set<Track> tracks = new HashSet<>();
 
+    @OneToOne(mappedBy = "user") @JsonManagedReference
+    private SpotifyToken spotifyToken;
+
     public Long getId() {
         return id;
     }
@@ -112,6 +116,14 @@ public class User implements Serializable {
 
     public void setTracks(Set<Track> tracks) {
         this.tracks = tracks;
+    }
+
+    public SpotifyToken getSpotifyToken() {
+        return spotifyToken;
+    }
+
+    public void setSpotifyToken(SpotifyToken spotifyToken) {
+        this.spotifyToken = spotifyToken;
     }
 
     @Override
