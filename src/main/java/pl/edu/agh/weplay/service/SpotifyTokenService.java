@@ -9,4 +9,5 @@ import pl.edu.agh.weplay.domain.User;
 public interface SpotifyTokenService {
     SpotifyToken createSpotifyToken(String accessToken, int expiresIn, User user);
     SpotifyToken getSpotifyTokenByLogin(String login);
+    void removeOldSpotifyTokens();
 }
