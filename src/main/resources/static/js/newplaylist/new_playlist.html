@@ -13,13 +13,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <input class="form-control" ng-model="vm.newFriend" type="text"
+                                <input class="form-control" ng-model="vm.newUser" type="text"
                                        placeholder="Search for users..."
                                        uib-typeahead="user.login for user in vm.searchUsers($viewValue)"
                                        typeahead-loading="loadingUsers" typeahead-no-results="noResultsUsers"
-                                       typeahead-on-select='vm.onSelectFriend($item, $model, $label)'>
+                                       typeahead-on-select='vm.onSelectUser($item, $model, $label)'>
                                 <span class="input-group-btn">
-                                     <button class="btn btn-default" ng-click="vm.addFriend($viewValue)">
+                                     <button class="btn btn-default" ng-click="vm.addUser($viewValue)">
                                          <span class="glyphicon glyphicon-plus"></span>
                                      </button>
                                 </span>
@@ -28,18 +28,18 @@
                             <div ng-show="noResultsUsers">
                                 <i class="glyphicon glyphicon-remove"></i> No Results Found
                             </div>
-                            <hr ng-show="vm.friends.length > 0">
-                            <table class="table table-striped" ng-show="vm.friends.length > 0">
+                            <hr ng-show="vm.users.length > 0">
+                            <table class="table table-striped" ng-show="vm.users.length > 0">
                                 <tr>
                                     <th>#</th>
                                     <th>Login</th>
                                     <th>Delete</th>
                                 </tr>
-                                <tr ng-repeat="friend in vm.friends track by $index">
+                                <tr ng-repeat="user in vm.users track by $index">
                                     <td>{{$index + 1}}</td>
-                                    <td width="99%">{{friend.login}}</td>
+                                    <td width="99%">{{user.login}}</td>
                                     <td style="white-space: nowrap;">
-                                        <button ng-click="vm.deleteFriend($index)"><i class="glyphicon glyphicon-trash"></i></button>
+                                        <button ng-click="vm.deleteUser($index)"><i class="glyphicon glyphicon-trash"></i></button>
                                     </td>
                                 </tr>
                             </table>
@@ -119,13 +119,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <input class="form-control" ng-model="vm.newSong" type="text"
+                                <input class="form-control" ng-model="vm.newTrack" type="text"
                                        placeholder="Search for tracks..."
-                                       uib-typeahead="track.artists + ' - ' + track.name + ' [' + track.album + ']' for track in vm.searchSong($viewValue)"
+                                       uib-typeahead="track.artists + ' - ' + track.name + ' [' + track.album + ']' for track in vm.searchTracks($viewValue)"
                                        typeahead-loading="loadingTracks" typeahead-no-results="noResults"
-                                       typeahead-on-select='vm.onSelect($item, $model, $label)'>
+                                       typeahead-on-select='vm.onSelectTrack($item, $model, $label)'>
                                 <span class="input-group-btn">
-                                     <button class="btn btn-default" ng-click="vm.addSong($viewValue)">
+                                     <button class="btn btn-default" ng-click="vm.addTrack($viewValue)">
                                          <span class="glyphicon glyphicon-plus"></span>
                                      </button>
                                 </span>
@@ -134,20 +134,20 @@
                             <div ng-show="noResults">
                                 <i class="glyphicon glyphicon-remove"></i> No Results Found
                             </div>
-                            <hr ng-show="vm.songs.length > 0">
-                            <table class="table table-striped" ng-show="vm.songs.length > 0">
+                            <hr ng-show="vm.tracks.length > 0">
+                            <table class="table table-striped" ng-show="vm.tracks.length > 0">
                                 <tr>
                                     <th>Artists</th>
                                     <th>Title</th>
                                     <th>Album</th>
                                     <th>Delete</th>
                                 </tr>
-                                <tr ng-repeat="track in vm.songs track by $index">
+                                <tr ng-repeat="track in vm.tracks track by $index">
                                     <td>{{track.artists}}</td>
                                     <td>{{track.name}}</td>
                                     <td>{{track.album}}</td>
                                     <td style="white-space: nowrap;">
-                                        <button ng-click="vm.deleteSong($index)"><i class="glyphicon glyphicon-trash"></i></button>
+                                        <button ng-click="vm.deleteTrack($index)"><i class="glyphicon glyphicon-trash"></i></button>
                                     </td>
                                 </tr>
                             </table>

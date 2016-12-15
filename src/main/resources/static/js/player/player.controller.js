@@ -13,6 +13,6 @@
 
     function PlayerController($sce, $stateParams) {
         var vm = this;
-        vm.frameSrc = $sce.trustAsResourceUrl('https://embed.spotify.com/?uri=spotify:trackset:WePlay:' + $stateParams.songs);
+        vm.frameSrc = $sce.trustAsResourceUrl('https://embed.spotify.com/?uri=spotify:trackset:WePlay:' + $stateParams.tracks);
     }
 })();
