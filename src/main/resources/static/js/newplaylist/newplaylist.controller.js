@@ -134,7 +134,7 @@
             console.log("Mood: " + vm.sliderMood.value);
             console.log("Hottness: " + vm.sliderHottness.value);
 
-            // $state.go('player', {tracks:'5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe'});
+            $state.go('player', {tracks:'5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe'});
             // PreferencesFactory.sendPreferences(vm.params);
         }
     }

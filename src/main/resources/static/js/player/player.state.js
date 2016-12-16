@@ -18,7 +18,7 @@
                 authorities: ['ROLE_USER']
             },
             params: {
-                songs: ''
+                tracks: ''
             },
             views: {
                 'content@': {

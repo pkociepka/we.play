@@ -60,6 +60,11 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot</artifactId>
+			<!--<version>x.x.x</version>-->
+		</dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>

@@ -26,3 +26,15 @@ weplay:
   security:
     rememberMe:
       key: b59c6f146879d5528a6bf382be207b5e9e626c5c
+
+#server:
+#  port: 8081
+#  ssl:
+#    enabled: true
+#    key-store: C:\WINDOWS\system32\keystore.p12
+#    key-password: weplaypass
+#    key-store-type: PKCS12
+#    key-alias: tomcat
+#  http:
+#    port: 8079
+
