@@ -5,7 +5,7 @@
 Click <a href="#" onclick="return window.redirect();">here</a> if you're not redirected ...
 <script language="javascript">
     window.redirect = function() {
-        window.location = '/#/callback?' + window.location.hash.substring(1);
+        window.location = decodeURI('/#/callback?' + window.location.hash.substring(1));
         return false;
     };
     window.redirect();

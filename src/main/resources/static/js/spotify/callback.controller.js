@@ -17,10 +17,11 @@
         vm.token_type = $location.search().token_type;
         vm.expires_in = $location.search().expires_in;
 
-        return $http.post('/api/spotifytoken/' + vm.access_token + '/' + vm.expires_in).then(function (response) {
-            $window.close();
-            $window.alert('Success!');
-            return response.data;
-        });
+        return $http.post('http://localhost:5000/api/spotify/sync/' + vm.access_token + '/' + vm.expires_in)
+            .then(function (response) {
+                $window.close();
+                $window.alert('Success!');
+                return response.data;
+            });
     }
 })();

@@ -29,8 +29,6 @@
                 ]
             }
         });
-        $locationProvider.html5Mode({
-            enabled: true
-        });
+        $locationProvider.html5Mode(true).hashPrefix('');
     }
 })();
