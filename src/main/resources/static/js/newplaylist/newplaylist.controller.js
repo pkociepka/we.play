@@ -115,27 +115,28 @@
         };
 
         vm.generate = function () {
-            angular.forEach(vm.users, function (value, key) {
-                $http.get('/api/spotifytoken/' + vm.users[key].login).then(
-                    function (response) {
-                        console.log(value); //user
-                        console.log(response.data); //token
-                    }, function (response) {
-                        console.log(value); //user
-                        console.log(response); //404 or sth
-                    }
-                );
-            });
-            angular.forEach(vm.tracks, function (value, key) {
-                console.log(value); //track
-            });
-            console.log("Energy: " + vm.sliderEnergy.value);
-            console.log("Dancability: " + vm.sliderDancability.value);
-            console.log("Mood: " + vm.sliderMood.value);
-            console.log("Hottness: " + vm.sliderHottness.value);
+            var dataObj = {
+                users : vm.users.map(function (user) {
+                    return user.login;
+                }),
+                energy : vm.sliderEnergy.value,
+                dancability : vm.sliderDancability.value,
+                mood : vm.sliderMood.value,
+                hottness : vm.sliderHottness.value
+            };
+            var result = null;
 
+            $http({
+                method : 'POST',
+                url : 'https://hookb.in/ZdxqzDrz', //Test
+                data: dataObj,
+                headers : {'Content-Type': 'application/json'}
+            }).then(function (response) {
+                result = response.data;
+            });
+
+            //TODO: create tracks' string from result and vm.tracks
             $state.go('player', {tracks:'5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe'});
-            // PreferencesFactory.sendPreferences(vm.params);
         }
     }
 })();
