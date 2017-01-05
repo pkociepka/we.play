@@ -79,6 +79,7 @@
                 return;
             }
             vm.tracks.push(vm.newTrack);
+            vm.newTrack = null;
             vm.tracks.sort(function (a, b) {
                 var left = a.artists.toLowerCase();
                 var right = b.artists.toLowerCase();
@@ -91,6 +92,7 @@
                 return;
             }
             vm.users.push(vm.newUser);
+            vm.newUser = null;
             vm.users.sort(function (a, b) {
                 var left = a.login.toLowerCase();
                 var right = b.login.toLowerCase();
