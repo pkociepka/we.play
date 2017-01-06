@@ -126,7 +126,6 @@
                 mood : vm.sliderMood.value,
                 hottness : vm.sliderHottness.value
             };
-            var result = null;
 
             $http({
                 method : 'POST',
@@ -134,10 +133,8 @@
                 data: dataObj,
                 headers : {'Content-Type': 'application/json'}
             }).then(function (response) {
-                result = response.data;
+                $state.go('player', {tracks:response.data});
             });
-
-            $state.go('player', {tracks:result});
         }
     }
 })();
