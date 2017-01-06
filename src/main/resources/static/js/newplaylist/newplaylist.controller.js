@@ -130,15 +130,14 @@
 
             $http({
                 method : 'POST',
-                url : 'https://hookb.in/ZdxqzDrz', //Test
+                url : 'http://localhost:5000/api/playlist',
                 data: dataObj,
                 headers : {'Content-Type': 'application/json'}
             }).then(function (response) {
                 result = response.data;
             });
 
-            //TODO: create tracks' string from result and vm.tracks
-            $state.go('player', {tracks:'5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe'});
+            $state.go('player', {tracks:result});
         }
     }
 })();
