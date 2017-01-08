@@ -20,7 +20,6 @@
 
         Principal.identity().then(function(account) {
             vm.account = account;
-            console.log(vm.account.login);
         }).then(function () {
             return $http.post('http://localhost:5000/api/spotify/sync/' + vm.access_token + '/' + vm.expires_in + '/' + vm.account.login)
                 .then(function (response) {
