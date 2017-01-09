@@ -158,6 +158,9 @@
             <button class="btn btn-primary" ng-disabled="vm.step == 1" ng-click="vm.prevStep()">Previous</button>
             <button class="btn btn-primary" ng-show="vm.step == 3" ng-click="vm.generate()">Generate</button>
             <button class="btn btn-primary" ng-click="vm.nextStep()" ng-hide="vm.step == 3">Next</button>
+            <div class="alert alert-danger" ng-show="vm.errorNoUser" >
+                <strong>No user selected!</strong> Please choose at least one.
+            </div>
         </div>
     </div>
 </div>

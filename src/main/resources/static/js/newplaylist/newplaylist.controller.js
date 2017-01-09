@@ -15,6 +15,7 @@
         vm.users = [];
         vm.newTrack = null;
         vm.tracks = [];
+        vm.errorNoUser = false;
 
         vm.sliderOptions = {
             showSelectionBar: true,
@@ -39,6 +40,10 @@
         };
 
         vm.nextStep = function () {
+            if (vm.step == 1 && (vm.users.isUndefined || vm.users.length < 1)) {
+                vm.errorNoUser = true;
+                return;
+            }
             vm.step += 1;
         };
 
@@ -84,7 +89,7 @@
                 var left = a.artists.toLowerCase();
                 var right = b.artists.toLowerCase();
                 return left > right ? 1 : left < right ? -1 : 0;
-            })
+            });
         };
 
         vm.addUser = function () {
@@ -97,7 +102,8 @@
                 var left = a.login.toLowerCase();
                 var right = b.login.toLowerCase();
                 return left > right ? 1 : left < right ? -1 : 0;
-            })
+            });
+            vm.errorNoUser = false;
         };
 
         vm.deleteTrack = function (index) {
